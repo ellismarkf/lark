@@ -1,13 +1,11 @@
 'use strict';
 
-var vulture = angular.module('vulture' [
+var vulture = angular.module('vulture', [
     'ngRoute',
-    'vultureControllers',
-    'vultureFilters',
-    'vultureServices'
+    'vultureControllers'
   ]);
 
-vulture.config([
+vulture.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/search', {
