@@ -1,1 +1,7 @@
-<h1>{{ test }}</h1>
+<h1>Cities you can fly to from Austin:</h1>
+<ul>
+  <li ng-repeat="trip in trips">
+    <h3>Destination: {{ trip.destination }}</h3>
+    <p>Price: {{ trip.price }}</p>
+  </li>
+</ul>
