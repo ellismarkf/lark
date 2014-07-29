@@ -7,3 +7,4 @@ tmp
 vulture-snapshots
 bower_components/
 cities/
+.jshintrc
