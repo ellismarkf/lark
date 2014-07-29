@@ -2,7 +2,7 @@
 
 var vultureControllers = angular.module('vultureControllers', []);
 
-vultureControllers.controller('searchCtlr', ['$scope',
-  function($scope) {
-    $scope.test = "Testing the views."
+vultureControllers.controller('searchCtlr', ['$scope', 'Destination'
+  function($scope, Destination) {
+    $scope.cities = Destination.query();
   }]);
