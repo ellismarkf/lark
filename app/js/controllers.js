@@ -22,9 +22,9 @@ vultureControllers.controller('searchCtlr', ['$scope', 'Destination', 'CityCode'
       // Massage tripData and put into result
 
       for(var i = 0; i < tripData.length; i += 1) {
-        var destination = tripData[i].trips.tripOption[0].pricing[0].fare;
+        var destinationPath = tripData[i].trips.tripOption[0].pricing[0].fare;
         var option = {};
-        option.destination = tripData[i].trips.tripOption[0].pricing[0].fare[tripData[i].trips.tripOption[0].pricing[0].fare.length - 1].destination;
+        option.destination = destinationPath[destinationPath.length - 1].destination;
         var price = tripData[i].trips.tripOption[0].saleTotal;
         var numPrice = parseInt((price.slice(3,price.length)));
         option.price = numPrice;
