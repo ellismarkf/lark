@@ -8,3 +8,10 @@ vultureServices.factory('Destination', ['$resource',
       query: {method: 'GET', params:{city: 'all'}, isArray:true}
     });
   }]);
+
+vultureServices.factory('CityCode', ['$resource',
+  function($resource) {
+    return $resource('cities/city-codes.json', {}, {
+      get: {method: 'GET'}
+    });
+  }]);
