@@ -15,3 +15,12 @@ vultureServices.factory('CityCode', ['$resource',
       get: {method: 'GET'}
     });
   }]);
+
+vultureServices.factory('apiKey', ['$resource',
+  function($resource){
+    return $resource('api-key.json',{
+      get: {method: 'GET'}
+    });
+  }]);
+
+// 'POST', 'https://www.googleapis.com/qpxExpress/v1/trips/search&key={API_KEY}'
