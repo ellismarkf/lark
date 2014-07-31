@@ -3,7 +3,8 @@
 var vulture = angular.module('vulture', [
     'ngRoute',
     'vultureControllers',
-    'vultureServices'
+    'vultureServices',
+    'vultureFilters'
   ]);
 
 vulture.config(['$routeProvider',
