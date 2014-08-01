@@ -7,9 +7,7 @@ vultureFilters.filter('priceMax', function() {
     var cheaper = [];
     for(var i = 0; i < trips.length; i++){
       var trip = trips[i];
-      if(number == null){
-        return trips;
-      } else if(trip.price < number){
+      if(trip.price < number){
         cheaper.push(trip);
       }
     }
