@@ -6,8 +6,8 @@
 <ul>
   <li ng-repeat="trip in trips | orderBy: predicate | priceMax:number | filter:search">
     <h3>Destination: {{ trip.cityName }}</h3>
-    <p>Price: USD{{ trip.price }}</p>
+    <p>Price: <small>USD</small><strong>{{ trip.price }}</strong></p>
     <p>Total Flight Miles: {{ trip.distance }}</p>
-    <p>Total Flight Duration: {{ trip.duration }}</p>
+    <p>Total Flight Duration: {{ trip.duration }} hrs</p>
   </li>
 </ul>
