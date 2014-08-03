@@ -4,8 +4,8 @@ var vultureControllers = angular.module('vultureControllers', ['ngResource']);
 
 vultureControllers.controller('')
 
-vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource', 'Destination', 'CityCode',
-  function($scope, $rootScope, $resource, Destination, CityCode) {
+vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource', '$http', 'Destination', 'CityCode',
+  function($scope, $rootScope, $resource, $http, Destination, CityCode) {
 
     $rootScope.test = "this is a test of rootScope";
 
@@ -26,6 +26,8 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
 
     });
 
+    // retrieve city codes and store in accessible object
+
     var c = {};
 
     CityCode.get().$promise.then(function (cities){
@@ -35,6 +37,109 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
       return c;
     });
 
+    // utilities
+
+    function objectLength(object) {
+      var size = 0;
+      for( var property in object){
+        size++;
+
+
+      }
+    }
+
+    function getKeyByValue(object, value) {
+      for( var prop in object ) {
+          if( object.hasOwnProperty( prop ) ) {
+              if( object[ prop ] === value )
+                return prop;
+          }
+      }
+    }
+
+    // form functions
+
+    var searchForm = document.getElementById('search');
+
+    function collectVals(city) {
+      var data = {};
+      data.request = {};
+      data.request.passengers = {
+        "infantInLapCount": 0,
+        "infantInSeatCount": 0,
+        "childCount": 0,
+        "seniorCount": 0
+      };
+      data.request.solutions = 1;
+      data.request.refundable = false;
+      var sliceInfo = {};
+      sliceInfo.destination = city;
+      data.request.slice = [sliceInfo];
+      for(var input = 0; input < searchForm.elements.length; input++){
+        var inputName = searchForm.elements[input].name;
+        var inputVal = searchForm.elements[input].value;
+
+        switch(inputName){
+          case "origin":
+            sliceInfo[inputName] = getKeyByValue(c, inputVal);
+            break;
+          case "date":
+            sliceInfo[inputName] = inputVal;
+            break;
+          case "passengers":
+            data.request.passengers.adultCount = parseInt(inputVal);
+        }
+      }
+      console.log('data is: ', data);
+      return data;
+    }
+
+    // document.getElementById('test').addEventListener('click', collectVals);
+    var requestPackage = [];
+    $scope.responsePackage = [];
+
+    document.getElementById('test').addEventListener('click', function(){
+      var requestPackage = [];
+      for( var city in c ) {
+        requestPackage.push(collectVals(city));
+      }
+
+      // return requestPackage;
+
+      requestPackage.splice(1, requestPackage.length - 1);
+
+      async.eachSeries(requestPackage, function(request, callback){
+        console.log('doing something');
+        $http.post('https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDLQxMkWe1rg9w1a1sqXxxObRvYrujjj4w',
+            request)
+        .success(function(response){
+          console.log('response from the server: ', response);
+          $scope.response = response;
+          $scope.responsePackage.push($scope.response);
+          console.log('the response package is: ', $scope.responsePackage);
+
+        });
+
+        callback();
+
+      }, function(err){
+        if(err){
+          console.log('something went wrong!');
+        } else {
+          console.log('all is well! your requests have been sent!');
+          return $scope.responsePackage;
+        }
+      });
+      console.log('I doubt this will work, but if it does: ', $scope.responsePackage);
+    });
+    // searchForm.addEventListener('submit', collectVals);
+
+    console.log("searchForm captured", searchForm.elements.length);
+
+
+    // searchForm.onsubmit(){
+
+    // }
 
     // form.onsubmit(){
     //   $http({
@@ -81,7 +186,7 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
         option.distance = distance;
 
         var duration = tripData[i].trips.tripOption[0].slice[0].duration;
-        option.duration = duration;
+        option.duration = (duration / 60).toFixed(2);
 
         option.cityName = c[option.destination];
 
