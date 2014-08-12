@@ -61,85 +61,103 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
       return c;
     });
 
-    var data = Flights.get(),
-       result = [];
+    // $scope.trips = [];
+
+    // var data = Flights.get();
+    //    // result = [];
 
 
-    for(var t = 0; t < data.length; t++){
-      data[t].then(function (tripData) {
-        var tripData = JSON.parse(tripData);
-        var option = {};
-
-        // console.log(tripData.trips.tripOption[0].pricing[0].fare);
-
-        var destinationPath = tripData.trips.tripOption[0].pricing[0].fare;
-        option.destination = destinationPath[destinationPath.length - 1].destination;
-
-        var price = tripData.trips.tripOption[0].saleTotal;
-        var numPrice = parseInt((price.slice(3,price.length)));
-        option.price = numPrice;
-
-        var segments = tripData.trips.tripOption[0].slice[0].segment;
-        var distance = 0;
-        for(var j = 0; j < segments.length; j++){
-          distance = segments[j].leg[0].mileage + distance;
-        }
-        option.distance = distance;
-
-        var duration = tripData.trips.tripOption[0].slice[0].duration;
-        option.duration = (duration / 60).toFixed(2);
-
-        option.cityName = c[option.destination];
-        console.log('option: ', option);
-
-        result.push(option);
-        // console.log('result: ', result);
-
-        $scope.trips = result;
-        // console.log('scope variable: ', $scope.trips);
-
-      });
-    }
-    $scope.predicate = '';
-    $scope.number = 5000;
-
-    // Destination.query().$promise.then(function (tripData){
-
-
-    //   var result = [];
-    //    // Massage tripData and put into result
-
-    //   for(var i = 0; i < tripData.length; i += 1) {
+    // for(var t = 0; t < data.length; t++){
+    //   data[t].then(function (tripData) {
+    //     var tripData = JSON.parse(tripData);
     //     var option = {};
 
-    //     var destinationPath = tripData[i].trips.tripOption[0].pricing[0].fare;
+    //     // console.log(tripData.trips.tripOption[0].pricing[0].fare);
+
+    //     var destinationPath = tripData.trips.tripOption[0].pricing[0].fare;
     //     option.destination = destinationPath[destinationPath.length - 1].destination;
 
-    //     var price = tripData[i].trips.tripOption[0].saleTotal;
+    //     var price = tripData.trips.tripOption[0].saleTotal;
     //     var numPrice = parseInt((price.slice(3,price.length)));
     //     option.price = numPrice;
 
-    //     var segments = tripData[i].trips.tripOption[0].slice[0].segment;
+    //     var segments = tripData.trips.tripOption[0].slice[0].segment;
     //     var distance = 0;
     //     for(var j = 0; j < segments.length; j++){
     //       distance = segments[j].leg[0].mileage + distance;
     //     }
     //     option.distance = distance;
 
-    //     var duration = tripData[i].trips.tripOption[0].slice[0].duration;
+    //     var duration = tripData.trips.tripOption[0].slice[0].duration;
     //     option.duration = (duration / 60).toFixed(2);
 
     //     option.cityName = c[option.destination];
+    //     console.log('option: ', option);
 
-    //     result.push(option);
+    //     $scope.$apply(function() {
+    //       $scope.trips.push(option);
+    //     });
+    //     console.log('scope array: ', $scope.trips);
+    //     // console.log('result: ', result);
 
-    //     $scope.trips = result;
-    //     $scope.predicate = '';
-    //     $scope.number = 5000;
-    //   };
+    //     // $scope.trips = result;
+    //     // console.log('scope variable: ', $scope.trips);
 
-    // });
+    //   });
+    // }
+    // $scope.predicate = '';
+    // $scope.number = 5000;
 
+    Destination.query().$promise.then(function (tripData){
+
+
+      $scope.trips = [];
+       // Massage tripData and put into result
+
+      for(var i = 0; i < tripData.length; i += 1) {
+        var option = {};
+
+        var destinationPath = tripData[i].trips.tripOption[0].pricing[0].fare;
+        option.destination = destinationPath[destinationPath.length - 1].destination;
+
+        var price = tripData[i].trips.tripOption[0].saleTotal;
+        var numPrice = parseInt((price.slice(3,price.length)));
+        option.price = numPrice;
+
+        var segments = tripData[i].trips.tripOption[0].slice[0].segment;
+        var distance = 0;
+        for(var j = 0; j < segments.length; j++){
+          distance = segments[j].leg[0].mileage + distance;
+        }
+        option.distance = distance;
+
+        var duration = tripData[i].trips.tripOption[0].slice[0].duration;
+        option.duration = (duration / 60).toFixed(2);
+
+        option.cityName = c[option.destination];
+
+        $scope.trips.push(option);
+
+      };
+
+      // $scope.trips = result;
+    });
+    var priceSlider = document.getElementById('price');
+    var durationSlider = document.getElementById('duration');
+
+    $scope.predicate = '';
+    $scope.number = getPriceValue();
+    $scope.hours = getDurationValue();
+
+
+
+    function getPriceValue (){
+      return priceSlider.value;
+    }
+
+    function getDurationValue (){
+      return durationSlider.value;
+    }
   }]);
 
 
