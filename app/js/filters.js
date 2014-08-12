@@ -14,3 +14,16 @@ vultureFilters.filter('priceMax', function() {
     return cheaper;
   };
 });
+
+vultureFilters.filter('durationMax', function() {
+  return function(trips, hours) {
+    var shorter = [];
+    for(var i = 0; i < trips.length; i++){
+      var trip = trips[i];
+      if(parseFloat(trip.duration) < parseFloat(hours)){
+        shorter.push(trip);
+      }
+    }
+    return shorter;
+  };
+});
