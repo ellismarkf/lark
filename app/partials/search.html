@@ -1,8 +1,24 @@
 <a href="#/results">This is a link to the results page.</a>
-<form action="#/results">
+<form id="search" action="#/results">
   <label for="origin">Origin City</label>
-  <input type="text" value="origin" name="origin">
+  <input type="text" name="origin" placeholder="Where are you flying from?"><br>
+  <label for="passengers">How many passengers?</label>
+  <select name="passengers">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select><br>
+  When do you want to leave? <input type="date" name="date" id="departure"><br>
+  <label for="stayLength">How long will your trip be?</label>
+  <select name="stayLength">
+    <option value="1">1 day</option>
+    <option value="2">2 days</option>
+    <option value="3">3 days</option>
+    <option value="4">4 days</option>
+    <option value="5">5 days</option>
+    <option value="6">6 days</option>
+    <option value="7">7 days</option>
+  </select>
   <input type="submit" value="Search">
 </form>
-{{$root.test}}<br>
-{{test}}
+<button id="test" ng-click="goToPage('/results')">Collect Values</button>
