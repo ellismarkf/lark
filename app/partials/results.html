@@ -1,10 +1,11 @@
 <h1>Cities you can fly to from Austin:</h1>
-<input type="text" ng-model="number">Price<br>
+0 <input id="price" type="range" min="0" max="2000" value="2000" ng-model="number">2000   Price  {{ number }}<br>
+0 <input id="duration" type="range" min="0" max="24" value="24" ng-model="hours">24   Duration  {{ hours }}<br>
 <input type="text" ng-model="search">City<br>
 
 <input type="checkbox" ng-model="price" ng-false-value="predicate = '';" ng-true-value="predicate = 'price';" ng-click="predicate='price';">
 <ul>
-  <li ng-repeat="trip in trips | orderBy: predicate | priceMax:number | filter:search">
+  <li ng-repeat="trip in trips | orderBy: predicate | priceMax:number | durationMax:hours | filter:search">
     <h3>Destination: {{ trip.cityName }}</h3>
     <p>Price: <small>USD</small><strong>{{ trip.price }}</strong></p>
     <p>Total Flight Miles: {{ trip.distance }}</p>
