@@ -1,12 +1,30 @@
-$('.droption').click(function(){
-  var that = $(this)[0];
-  var other = that.childNodes[3];
-  var display = $(other).css("display");
-  if(display == 'none' && this.id == 'passengers') {
-    $(other).slideDown("ease");
-  } else if(display == 'none' && this.id == 'stay') {
-    $(other).slideDown("ease");
+$('.droption p').click(function(){
+  console.log(this);
+  var parent = this.parentElement;
+  var dropMenu = parent.childNodes[3];
+  var display = $(dropMenu).css("display");
+  if(display == 'none' && parent.id == 'passengers') {
+    $(dropMenu).slideDown("ease");
+  } else if(display == 'none' && parent.id == 'stay') {
+    $(dropMenu).slideDown("ease");
   } else {
-    $(other).slideUp("ease");
+    $(dropMenu).slideUp("ease");
   }
+});
+
+$('.incrementor button').click(function(e){
+  e.preventDefault();
+  var selectedInput = $(this).siblings('input')[0]
+  var inputValue = selectedInput.value
+  var passengerCount = parseInt(inputValue);
+  if(this.dataset.buttonType == 'increment'){
+    selectedInput.value = (formLogic.add(passengerCount));
+  }
+  if(this.dataset.buttonType == 'decrement'){
+    selectedInput.value = (formLogic.subtract(passengerCount));
+  }
+});
+
+$('.big-btn').click(function(e){
+  e.preventDefault();
 });
