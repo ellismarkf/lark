@@ -344,7 +344,7 @@ body {
   font-weight: 200;
   font-size: 1rem;
   position: relative;
-  top: 1px;
+  top: 0px;
 }
 
 .search input:focus {
@@ -387,6 +387,7 @@ body {
   font-weight: 700;
   box-sizing: border-box;
   position: relative;
+  margin-left: -1px;
 }
 
 .search .submit:hover {
@@ -428,15 +429,29 @@ body {
   box-shadow: 0 10px 40px -10px black;
   position: absolute;
   top: 32px;
-  left: 0px;
-  padding: 10px;
+  left: -1.5px;
+  padding: 10px 10px 5px 15px;
+  z-index: 10;
+}
+.search .droption-menu .row:first-child {
+  padding: 0px 0px 10px;
+}
+.search .droption-menu .row {
+  border-bottom: 1px dotted #49506e;
+  padding: 10px 0px;
+}
+.search .droption-menu .row:last-child {
+  border-bottom: none;
 }
 .search .droption-menu span {
   display: inline-block;
   float: left;
 }
 .search .droption-menu .type {
-  margin-right: 20px;
+  width: 100px;
+}
+.search .droption-menu .length {
+  margin-right: 12px;
 }
 .search .droption-menu .incrementor {
   display: inline-block;
@@ -454,6 +469,13 @@ body {
   position: relative;
   top: -3px;
 }
+.search .droption-menu .incrementor button:focus {
+  outline: none;
+}
+.search .droption-menu .incrementor button:hover {
+  background-color: #353a50;
+  border: 1px solid #212431;
+}
 .search .droption-menu .incrementor input {
   width: 1.09rem;
   height: 1.09rem;
@@ -461,6 +483,25 @@ body {
   position: relative;
   top: 0px;
   cursor: default;
+  text-align: center;
+}
+.search .droption-menu .big-btn {
+  margin-left: 40px;
+  display: inline-block;
+  border-radius: 0;
+  background-color: #49506e;
+  border: 1px solid #2b2f40;
+  color: whitesmoke;
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: .9rem;
+}
+.search .droption-menu .big-btn:focus {
+  outline: none;
+}
+.search .droption-menu .big-btn:hover {
+  background-color: #353a50;
+  border: 1px solid #212431;
 }
 .search .droption-menu .age-range {
   float: right;
