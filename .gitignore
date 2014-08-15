@@ -9,3 +9,4 @@ bower_components/
 cities/
 .jshintrc
 api-key.json
+.sass-cache/
