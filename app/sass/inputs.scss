@@ -68,11 +68,13 @@
   position: relative;
   line-height: 30px;
   margin: 0 -5px;
-  padding: 0 30px 2px 10px;
+  // padding: 0 30px 2px 10px;
   font-weight: 200;
 
   p {
     margin: 0;
+    padding: 0 30px 2px 10px;
+    cursor: default;
   }
 }
 .p {
