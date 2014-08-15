@@ -11,9 +11,45 @@
             <div class="incrementor">
               <button data-button-type="increment">+</button>
               <button data-button-type="decrement">-</button>
-              <input>
+              <input value="0">
             </div>
             <span class="age-range">18-67</span>
+          </div>
+          <div class="row clearfix">
+            <span class="type">Seniors</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input value="0">
+            </div>
+            <span class="age-range">67+</span>
+          </div>
+          <div class="row clearfix">
+            <span class="type">Juniors</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input value="0">
+            </div>
+            <span class="age-range">10-18</span>
+          </div>
+          <div class="row clearfix">
+            <span class="type">Children</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input data-passenger-count value='0'>
+            </div>
+            <span class="age-range">1-10</span>
+          </div>
+          <div class="row clearfix">
+            <span class="type">Infants</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input value="0">
+            </div>
+            <span class="age-range">0-1</span>
           </div>
         </div>
       </div>
@@ -22,12 +58,23 @@
       </select>
       <input type="date" name="date" id="departure">
       <select name="stayLength">
-        <option></option>
+        <option value=""></option>
       </select>
       <div id="stay" class="droption">
-        <a>Coming back in...</a>
+        <p>Coming back...</p>
         <div id="s" class="droption-menu s">
-          <p>I am a thing.</p>
+          <div class="row clearfix">
+            <span class="length">..in</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input data-passenger-count value='0'>
+            </div>
+            <span class="age-range">days</span>
+          </div>
+          <div class="row clearfix">
+            <button data-button-type="never" class="big-btn">NEVERRRR</button>
+          </div>
         </div>
       </div>
     </form>
