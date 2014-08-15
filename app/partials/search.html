@@ -9,12 +9,13 @@
           <p>I am a thing.</p>
         </div>
       </div>
-<!--       <select name="passengers">
-        <option value="1">1 adult</option>
-        <option value="2">2 adults</option>
-        <option value="3">3 adults</option>
-      </select> -->
+      <select name="passengers">
+        <option value=""></option>
+      </select>
       <input type="date" name="date" id="departure">
+      <select name="stayLength">
+        <option></option>
+      </select>
       <div id="stay" class="droption">
         <a>Coming back in...</a>
         <div id="s" class="droption-menu">
@@ -25,4 +26,5 @@
     <button id="submit" class="inline submit" ng-click="goToPage('/results')">SEARCH</button>
   </div>
   </section>
+  <script type="text/javascript" src="js/search-logic.js"></script>
   <script type="text/javascript" src="js/search-ui.js"></script>
