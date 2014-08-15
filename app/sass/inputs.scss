@@ -74,16 +74,65 @@
     margin: 0;
   }
 }
+.p {
+  width: 250px;
+}
+.s {
+  width: 175px;
+}
 .search .droption-menu {
   display:none;
   background-color: white;
   border: 1px solid $vulture-purple;
   box-shadow: 0 10px 40px -10px black;
-  width: 200px;
-  height: 350px;
   position: absolute;
   top: 32px;
   left: 0px;
+  padding: 10px;
+
+  span {
+    display: inline-block;
+    float: left;
+  }
+
+  .type {
+    margin-right: 20px;
+  }
+
+  .incrementor {
+    display: inline-block;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 0px 5px;
+
+    button {
+      display:inline-block;
+      border-radius: 0;
+      background-color: $vulture-purple;
+      border: 1px solid darken($vulture-purple, 15%);
+      color: whitesmoke;
+      font-weight: 700;
+      position: relative;
+      top: -3px;
+    }
+
+    input {
+      width: 1.09rem;
+      height: 1.09rem;
+      display: inline-block;
+      position: relative;
+      top: 0px;
+      cursor: default;
+    }
+  }
+
+  .age-range {
+    float: right;
+    padding-right: 10px;
+  }
+
+
+
 }
 
 
