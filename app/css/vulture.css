@@ -369,12 +369,11 @@ body {
   font-size: 1rem;
   font-weight: 200;
   position: relative;
-  top: 1px;
+  top: 0px;
 }
 
-.search input[type="select"] {
-  height: 30px;
-  border-radius: 0px;
+.search select {
+  display: none;
 }
 
 .search .submit {
@@ -388,7 +387,6 @@ body {
   font-weight: 700;
   box-sizing: border-box;
   position: relative;
-  top: 1px;
 }
 
 .search .submit:hover {
@@ -400,13 +398,13 @@ body {
 .search .droption {
   background-color: white;
   border: 1px solid #49506e;
+  color: #49506e;
   background-image: url("/app/img/droption-arrow.png");
   background-repeat: no-repeat;
   background-position: 95% center;
   display: inline-block;
   position: relative;
-  top: 1px;
-  line-height: 31px;
+  line-height: 30px;
   margin: 0 -5px;
   padding: 0 30px 2px 10px;
   font-weight: 200;
@@ -419,9 +417,10 @@ body {
   display: none;
   background-color: white;
   border: 1px solid #49506e;
-  box-shadow: 0 0 40px black;
+  box-shadow: 0 10px 40px -10px black;
   width: 200px;
   height: 350px;
   position: absolute;
-  top: 35px;
+  top: 32px;
+  left: 0px;
 }
