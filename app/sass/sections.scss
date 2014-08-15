@@ -1,0 +1,49 @@
+nav {
+  height: 50px;
+  background-color: $vulture-purple;
+
+  .logo {
+    font-family: 'Lobster', cursive;
+    font-size: 1.6rem;
+    line-height: 50px;
+    text-decoration: none;
+    color: whitesmoke;
+    text-shadow: 1px 1px 1px $vulture-gold;
+    margin-left: 50px;
+  }
+
+  ul {
+    float:right;
+    list-style: none;
+    margin: 0 60px 0 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      line-height: 50px;
+
+      a {
+        font-weight: 700;
+        font-size: .9rem;
+        color: whitesmoke;
+        display: block;
+        text-decoration: none;
+        padding: 0 15px;
+      }
+    }
+    li:hover {
+      border-bottom: 7px solid $vulture-gold;
+    }
+  }
+}
+
+.search {
+  background-image: url('/app/img/sunset-plane.jpg');
+  background-position: center;
+  height: 500px;
+
+  form {
+    box-shadow: 0 0 40px black;
+    display: inline;
+  }
+}

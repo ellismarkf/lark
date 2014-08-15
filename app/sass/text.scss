@@ -1,0 +1,23 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search h1 {
+  margin: 6rem 0 2rem;
+  font-weight: 300;
+  line-height: 3.2rem;
+
+  strong {
+    font-size: 3rem;
+    font-weight:800;
+    color: $vulture-purple;
+    text-shadow: none;
+    -webkit-text-stroke: none;
+
+    em {
+      -webkit-text-stroke: 2px $vulture-purple;
+      color: white;
+      font-style:normal;
+    }
+  }
+}
