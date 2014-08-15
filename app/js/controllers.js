@@ -43,7 +43,7 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
       $location.path( path );
     };
 
-    document.getElementById('test').addEventListener('click', function(){
+    document.getElementById('submit').addEventListener('click', function(){
       Flights.fetch(c)
     });
 
