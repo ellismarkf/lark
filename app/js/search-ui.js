@@ -14,6 +14,7 @@ $('.droption p').click(function(){
 
 $('.incrementor button').click(function(e){
   e.preventDefault();
+  var formInput;
   var selectedInput = $(this).siblings('input')[0]
   var inputValue = selectedInput.value
   var passengerCount = parseInt(inputValue);
@@ -23,6 +24,8 @@ $('.incrementor button').click(function(e){
   if(this.dataset.buttonType == 'decrement'){
     selectedInput.value = (formLogic.subtract(passengerCount));
   }
+  formInput = $('select[name="passengers"]')[0];
+  console.log(formInput.value);
 });
 
 $('.big-btn').click(function(e){
