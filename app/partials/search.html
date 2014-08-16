@@ -3,7 +3,7 @@
     <h1>Stop traveling.<br><strong><em>START</em>EXPLORING</strong></h1>
     <form id="search" action="#/results">
       <input type="text" name="origin" placeholder="Where are you flying from?">
-      <div id="passengers" class="droption">
+      <div id="passengers" class="droption" data-passenger-total="0">
         <p>passengers</p>
         <div id="p" class="droption-menu p">
           <div class="row clearfix">
@@ -13,7 +13,7 @@
               <button data-button-type="decrement">-</button>
               <input value="0">
             </div>
-            <span class="age-range">18-67</span>
+            <span class="age-range">18-64</span>
           </div>
           <div class="row clearfix">
             <span class="type">Seniors</span>
@@ -22,16 +22,16 @@
               <button data-button-type="decrement">-</button>
               <input value="0">
             </div>
-            <span class="age-range">67+</span>
+            <span class="age-range">65+</span>
           </div>
           <div class="row clearfix">
-            <span class="type">Juniors</span>
+            <span class="type">Youth</span>
             <div class="incrementor">
               <button data-button-type="increment">+</button>
               <button data-button-type="decrement">-</button>
               <input value="0">
             </div>
-            <span class="age-range">10-18</span>
+            <span class="age-range">12-17</span>
           </div>
           <div class="row clearfix">
             <span class="type">Children</span>
@@ -40,20 +40,29 @@
               <button data-button-type="decrement">-</button>
               <input data-passenger-count value='0'>
             </div>
-            <span class="age-range">1-10</span>
+            <span class="age-range">2-11</span>
           </div>
           <div class="row clearfix">
-            <span class="type">Infants</span>
+            <span class="type">Infants (seat)</span>
             <div class="incrementor">
               <button data-button-type="increment">+</button>
               <button data-button-type="decrement">-</button>
               <input value="0">
             </div>
-            <span class="age-range">0-1</span>
+            <span class="age-range">under 2</span>
+          </div>
+          <div class="row clearfix">
+            <span class="type">Infants (lap)</span>
+            <div class="incrementor">
+              <button data-button-type="increment">+</button>
+              <button data-button-type="decrement">-</button>
+              <input value="0">
+            </div>
+            <span class="age-range">under 2</span>
           </div>
         </div>
       </div>
-      <select name="passengers">
+      <select name="passengers" value="arbitrary">
         <option value="test"></option>
       </select>
       <input type="date" name="date" id="departure">
