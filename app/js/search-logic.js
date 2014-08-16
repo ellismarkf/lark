@@ -22,9 +22,18 @@ var formLogic = (function(){
     return returnDate;
   }
 
+  function sum(array) {
+    var total = 0;
+    for(var i = 0; i < array.length; i++){
+      total = total + parseInt(array[i].value);
+    }
+    return total;
+  } 
+
   return {
     add: increment,
     subtract: subtract,
-    calcDate: calcDate
+    calcDate: calcDate,
+    sum: sum
   }
 })();
