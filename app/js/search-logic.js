@@ -12,13 +12,23 @@ var formLogic = (function(){
     }
   }
 
-  function calcDate (selectedDate, days) {
+  function calcDate (selectedDate, days, operation) {
     var departureDate = Date.parse(selectedDate);
-    var theFuture = new Date(+(new Date(departureDate)) + (1000 * 60 * 60 * 24 * days));
+    if(operation == 'add'){
+      var theFuture = new Date(+(new Date(departureDate)) + (1000 * 60 * 60 * 24 * (days+1)));
+      console.log('the real future: ', Date.parse(theFuture));
+    } else if(operation = 'subtract'){
+      var backToTheFuture = new Date(+(new Date(departureDate)) + (1000 * 60 * 60 * 24 * (days+1)));
+      console.log('back to the future: ', backToTheFuture, Date.parse(backToTheFuture));
+      var theFuture = new Date(+(new Date(backToTheFuture)) - (1000 * 60 * 60 * 24));
+      console.log('theFuture: ', theFuture, theFuture.getMonth()+1, theFuture.getDate(), theFuture.getFullYear());
+    } else {
+      return false;
+    }
     var returnDate = {};
     returnDate.month = theFuture.getMonth()+1;
     returnDate.day = theFuture.getDate();
-    returnDate.yaer = theFuture.getFullYear();
+    returnDate.year = theFuture.getFullYear();
     return returnDate;
   }
 
