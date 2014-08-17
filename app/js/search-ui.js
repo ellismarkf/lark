@@ -1,4 +1,10 @@
 var ui = (function(){
+  var $departure = document.getElementById('departure');
+  $departure.onchange = function() {
+    $departure.dataset.departure = $departure.value;
+    console.log($departure.dataset.departure);
+  }
+
   $('.droption p').click(function(){
     var parent = this.parentElement;
     var dropMenu = parent.childNodes[3];
@@ -16,28 +22,67 @@ var ui = (function(){
 
   });
 
+  var vals = vals || {
+    'adults': 0,
+    'seniors': 0,
+    'youth': 0,
+    'children': 0,
+    'seatInfants': 0,
+    'lapInfants': 0 
+  };
+
   $('.incrementor button').click(function(e){
     e.preventDefault();
+
     var formInput,
         inputName;
-    var selectedInput = $(this).siblings('input')[0]
+    var selectedInput = $(this).siblings('input')[0];
+    var type = this.parentElement.previousElementSibling.innerHTML;
     var inputValue = selectedInput.value
-    var passengerCount = parseInt(inputValue);
-    var totalPassengers = $('#passengers')[0];
-    if(this.dataset.buttonType == 'increment'){
-      selectedInput.value = (formLogic.add(passengerCount));
-      totalPassengers.dataset.passengerTotal = (formLogic.add(parseInt(totalPassengers.dataset.passengerTotal)));
-      console.log(totalPassengers.dataset.passengerTotal);
+    var typeData = selectedInput.dataset;
+    var rawData = parseInt(inputValue);
+    var gggrandparent = this.parentElement.parentElement.parentElement.parentElement;
+    var data = gggrandparent.dataset;
+    
+    
+    
+    if(this.dataset.buttonType == 'increment' && data['passengerTotal']){
+      selectedInput.value = (formLogic.add(rawData));
+      typeData[transformString(type)] = (formLogic.add(rawData));
+      
+      vals[transformString(type)] = parseInt(typeData[transformString(type)]);
+      
+
+      var passengerTotal = formLogic.sumObjProps(vals);
+      
+
+      data.passengerTotal = passengerTotal;
+      updatePassengers(passengerTotal);
+        
     }
+    if(data['return']){
+
+    }
+
     if(this.dataset.buttonType == 'decrement'){
-      selectedInput.value = (formLogic.subtract(passengerCount));
-      totalPassengers.dataset.passengerTotal = (formLogic.subtract(parseInt(totalPassengers.dataset.passengerTotal)));
+      selectedInput.value = (formLogic.subtract(rawData));
+      typeData[transformString(type)] = (formLogic.subtract(rawData));
+
+      if(data['passengerTotal']){
+        vals[transformString(type)] = parseInt(typeData[transformString(type)]);
+        
+
+        var passengerTotal = formLogic.sumObjProps(vals);
+        
+
+        data.passengerTotal = passengerTotal;
+        updatePassengers(passengerTotal);
+
+      }
+      if(data['return']){
+        
+      }
     }
-    formInput = $('select[name="passengers"]')[0];
-
-    formInput.childNodes[1].value = selectedInput.value;
-
-    updatePassengers(totalPassengers.dataset.passengerTotal);
   });
 
   $('.big-btn').click(function(e){
@@ -58,6 +103,20 @@ var ui = (function(){
     } else {
       el.innerHTML = newContent + " passengers";
     }
+  }
+
+  function transformString(string){
+    var re = /[^\w* ]/g;
+    var plainString = string.replace(re, '');
+    var stringArray = plainString.toLowerCase().split(' ');
+    if(stringArray.length > 1){
+      stringArray = stringArray.reverse('');
+      for(var word = 1; word < stringArray.length; word++){
+        stringArray[word] = stringArray[word][0].toUpperCase() + stringArray[word].substr(1);
+        // stringArray[word] = stringArray[word][0].toUpperCase() + stringArray[word].substr(1);
+      }
+    }
+    return stringArray.join('');
   }
 
 })();
