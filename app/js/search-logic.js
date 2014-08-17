@@ -22,18 +22,38 @@ var formLogic = (function(){
     return returnDate;
   }
 
-  function sum(array) {
+  function sumStringNums(array) {
     var total = 0;
     for(var i = 0; i < array.length; i++){
-      total = total + parseInt(array[i].value);
+      console.log('current sum string value: ', array[i]);
+      total = total + parseInt(array[i]);
+      console.log('string sum total: ', total);
     }
     return total;
+  }
+
+  function collect(array, iterator){
+    var newArr = [];
+    for(var i = 0; i < array.length; i++){
+      var newVal = iterator(array[i]);
+      newArr.push(newVal);
+    }
+    return newArr;
+  }
+
+  function sumObjProps(obj){
+    var sum = 0;
+    for(var prop in obj){
+      sum += obj[prop];
+    }
+    return sum; 
   } 
 
   return {
     add: increment,
     subtract: subtract,
     calcDate: calcDate,
-    sum: sum
+    sumStringNums: sumStringNums,
+    sumObjProps: sumObjProps
   }
 })();
