@@ -59,106 +59,142 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
       }
     }
 
+    function collectVals(city, cities) {
+      var data = {};
+      data.request = {};
+      data.request.passengers = {
+        "infantInLapCount": 0,
+        "infantInSeatCount": 0,
+        "childCount": 0,
+        "seniorCount": 0
+      };
+      data.request.solutions = 1;
+      data.request.refundable = false;
+      var sliceInfo = {};
+      sliceInfo.destination = city;
+      data.request.slice = [sliceInfo];
+      for(var input = 0; input < searchForm.elements.length; input++){
+        var inputName = searchForm.elements[input].name;
+        var inputVal = searchForm.elements[input].value;
+
+        switch(inputName){
+          case "origin":
+            sliceInfo[inputName] = getKeyByValue(cities, inputVal);
+            break;
+          case "date":
+            sliceInfo[inputName] = inputVal;
+            break;
+          case "passengers":
+            data.request.passengers.adultCount = parseInt(inputVal);
+            break;
+        }
+      }
+      // console.log('data is: ', data);
+      return data;
+    }
+
+    function getFlightData(url, index) {
+      return new Promise(function(resolve, reject){
+        var req = new XMLHttpRequest();
+        req.open('POST', url, true);
+        var params = JSON.stringify(requestPackage[request]);
+        req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+
+        req.onload = function() {
+          if(req.status == 200) {
+            resolve(req.response);
+          }
+          else {
+            reject(Error(req.statusText));
+          }
+        };
+
+        req.onerror = function(){
+          reject(Error("Network Error"));
+        };
+        req.send(params);
+      });
+    }
 
     function fetch(cities){
       requestPackage = [];
 
-      function collectVals(city) {
-        var data = {};
-        data.request = {};
-        data.request.passengers = {
-          "infantInLapCount": 0,
-          "infantInSeatCount": 0,
-          "childCount": 0,
-          "seniorCount": 0
-        };
-        data.request.solutions = 1;
-        data.request.refundable = false;
-        var sliceInfo = {};
-        sliceInfo.destination = city;
-        data.request.slice = [sliceInfo];
-        for(var input = 0; input < searchForm.elements.length; input++){
-          var inputName = searchForm.elements[input].name;
-          var inputVal = searchForm.elements[input].value;
+      // function collectVals(city) {
+      //   var data = {};
+      //   data.request = {};
+      //   data.request.passengers = {
+      //     "infantInLapCount": 0,
+      //     "infantInSeatCount": 0,
+      //     "childCount": 0,
+      //     "seniorCount": 0
+      //   };
+      //   data.request.solutions = 1;
+      //   data.request.refundable = false;
+      //   var sliceInfo = {};
+      //   sliceInfo.destination = city;
+      //   data.request.slice = [sliceInfo];
+      //   for(var input = 0; input < searchForm.elements.length; input++){
+      //     var inputName = searchForm.elements[input].name;
+      //     var inputVal = searchForm.elements[input].value;
 
-          switch(inputName){
-            case "origin":
-              sliceInfo[inputName] = getKeyByValue(cities, inputVal);
-              break;
-            case "date":
-              sliceInfo[inputName] = inputVal;
-              break;
-            case "passengers":
-              data.request.passengers.adultCount = parseInt(inputVal);
-              break;
-          }
-        }
-        // console.log('data is: ', data);
-        return data;
-      }
+      //     switch(inputName){
+      //       case "origin":
+      //         sliceInfo[inputName] = getKeyByValue(cities, inputVal);
+      //         break;
+      //       case "date":
+      //         sliceInfo[inputName] = inputVal;
+      //         break;
+      //       case "passengers":
+      //         data.request.passengers.adultCount = parseInt(inputVal);
+      //         break;
+      //     }
+      //   }
+      //   // console.log('data is: ', data);
+      //   return data;
+      // }
 
       for( var city in cities ) {
-        requestPackage.push(collectVals(city));
+        requestPackage.push(collectVals(city, cities));
       }
+
+      console.log(requestPackage);
       // return requestPackage;
 
-      requestPackage.splice(5, requestPackage.length - 5);
+      // requestPackage.splice(5, requestPackage.length - 5);
 
-      function getFlightData(url, index) {
-        return new Promise(function(resolve, reject){
-          var req = new XMLHttpRequest();
-          req.open('POST', url, true);
-          var params = JSON.stringify(requestPackage[request]);
-          req.setRequestHeader("Content-type", "application/json; charset=utf-8");
+      // function getFlightData(url, index) {
+      //   return new Promise(function(resolve, reject){
+      //     var req = new XMLHttpRequest();
+      //     req.open('POST', url, true);
+      //     var params = JSON.stringify(requestPackage[request]);
+      //     req.setRequestHeader("Content-type", "application/json; charset=utf-8");
 
-          req.onload = function() {
-            if(req.status == 200) {
-              resolve(req.response);
-            }
-            else {
-              reject(Error(req.statusText));
-            }
-          };
+      //     req.onload = function() {
+      //       if(req.status == 200) {
+      //         resolve(req.response);
+      //       }
+      //       else {
+      //         reject(Error(req.statusText));
+      //       }
+      //     };
 
-          req.onerror = function(){
-            reject(Error("Network Error"));
-          };
-          req.send(params);
-        });
-      }
-
-
-      for (var request = 0; request < requestPackage.length; request++){
-        responsePackage[request] = getFlightData('https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDLQxMkWe1rg9w1a1sqXxxObRvYrujjj4w', request);
-        // create promise
-        // send http request with requestPackage[request]
-        // return promise?
-      }
-
-      console.log(responsePackage)
-
-      // async.eachSeries(requestPackage, function(request, callback) {
-      //   // console.log('doing something');
-      //   $http.post('https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDLQxMkWe1rg9w1a1sqXxxObRvYrujjj4w',
-      //       request)
-      //   .success(function(response){
-      //     $rootScope.resData.push(response)
-      //     console.log('response from the server: ', response);
-      //     var response = response;
-      //     responsePackage.push(response);
-      //     console.log('the response package is: ', responsePackage);
-      //     callback();
+      //     req.onerror = function(){
+      //       reject(Error("Network Error"));
+      //     };
+      //     req.send(params);
       //   });
+      // }
 
-      // }, function(err){
-      //   if(err){
-      //     console.log('something went wrong!');
-      //   } else {
-      //     console.log('all is well! your requests have been sent!', responsePackage);
-      //     return responsePackage;
-      //   }
-      // });
-      return responsePackage;
+      // UNCOMMENT THIS TO MAKE API CALLS --------------vvvvvvvvv
+
+      // for (var request = 0; request < requestPackage.length; request++){
+      //   responsePackage[request] = getFlightData('https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDLQxMkWe1rg9w1a1sqXxxObRvYrujjj4w', request);
+      // }
+
+      // console.log(responsePackage)
+      // return responsePackage;
+
+      // END UNCOMMENTING HERE -----------------------------
     }
 
     function get (){
