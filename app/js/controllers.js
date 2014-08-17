@@ -9,23 +9,32 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
 
     var c = {};
 
+    function checkEscaped(value, object){
+      if(value == object[value]){
+        return true;
+      }
+    }
+
     CityCode.get().$promise.then(function (cities){
+      var escaped = {
+        "$promise": "$promise",
+        "$resolved": "$resolved",
+        "$get": "$get",
+        "$save": "$save",
+        "$query": "$query",
+        "$remove": "$remove",
+        "$delete": "$delete"
+      }
       for(var city in cities){
+        if(checkEscaped(city, escaped)){
+            return;         
+        }
         c[city] = cities[city];
       }
       return c;
     });
 
     // utilities
-
-    function objectLength(object) {
-      var size = 0;
-      for( var property in object){
-        size++;
-
-
-      }
-    }
 
     function getKeyByValue(object, value) {
       for( var prop in object ) {
