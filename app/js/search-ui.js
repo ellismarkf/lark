@@ -1,9 +1,24 @@
 var ui = (function(){
   var $departure = document.getElementById('departure');
+  var $initialReturnDateValue = $('#stay p')[0].innerHTML;
+
+  if(!$departure.value || $departure.value == null){
+    addRule('#stay', 'opacity', '.7');
+  }
+
   $departure.onchange = function() {
     $departure.dataset.departure = $departure.value;
-    console.log($departure.dataset.departure);
+    if(!$departure.value || $departure.value == null){
+      $('#stay p')[0].innerHTML = $initialReturnDateValue;
+      $('#stay .droption-menu input')[0].value = 0;
+      addRule('#stay', 'opacity', '.7');
+    } else {
+      removeRule('#stay', 'opacity');
+    }
   }
+
+
+
 
   $('.droption p').click(function(){
     var parent = this.parentElement;
@@ -12,7 +27,7 @@ var ui = (function(){
     if(display == 'none' && parent.id == 'passengers') {
       $(dropMenu).slideDown("ease");
       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
-    } else if(display == 'none' && parent.id == 'stay') {
+    } else if(display == 'none' && parent.id == 'stay' && $departure.value) {
       $(dropMenu).slideDown("ease");
       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
     } else {
@@ -39,18 +54,18 @@ var ui = (function(){
     var selectedInput = $(this).siblings('input')[0];
     var type = this.parentElement.previousElementSibling.innerHTML;
     var inputValue = selectedInput.value
-    var typeData = selectedInput.dataset;
-    var rawData = parseInt(inputValue);
+    var inputData = selectedInput.dataset;
+    var rawInputData = parseInt(inputValue);
     var gggrandparent = this.parentElement.parentElement.parentElement.parentElement;
     var data = gggrandparent.dataset;
     
     
-    
+    // PASSENGER INCREMENT -----------------------------------------
     if(this.dataset.buttonType == 'increment' && data['passengerTotal']){
-      selectedInput.value = (formLogic.add(rawData));
-      typeData[transformString(type)] = (formLogic.add(rawData));
+      selectedInput.value = (formLogic.add(rawInputData));
+      inputData[transformString(type)] = (formLogic.add(rawInputData));
       
-      vals[transformString(type)] = parseInt(typeData[transformString(type)]);
+      vals[transformString(type)] = parseInt(inputData[transformString(type)]);
       
 
       var passengerTotal = formLogic.sumObjProps(vals);
@@ -60,28 +75,60 @@ var ui = (function(){
       updatePassengers(passengerTotal);
         
     }
-    if(data['return']){
+
+    // DATE INCREMENT --------------------------------------------------
+    if(this.dataset.buttonType == 'increment' && data['return']){
+      var daysDescription = selectedInput.parentElement.nextElementSibling;
+      selectedInput.value = (formLogic.add(rawInputData));
+      var days = inputData['daysCount'] = (formLogic.add(rawInputData));
+
+      if(selectedInput.value == 1){
+        daysDescription.innerHTML = 'day';
+      } else {
+        daysDescription.innerHTML = 'days';
+      }
+
+      var returnDate = formLogic.calcDate($departure.value, days, 'add');
+
+      data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
+  
+    }
+
+
+    // PASSENGER DECREMENT -----------------------------------------------
+    if(this.dataset.buttonType == 'decrement' && data['passengerTotal']){
+      selectedInput.value = (formLogic.subtract(rawInputData));
+      inputData[transformString(type)] = (formLogic.subtract(rawInputData));
+
+      vals[transformString(type)] = parseInt(inputData[transformString(type)]);
+      
+
+      var passengerTotal = formLogic.sumObjProps(vals);
+      
+
+      data.passengerTotal = passengerTotal;
+      updatePassengers(passengerTotal);
 
     }
 
-    if(this.dataset.buttonType == 'decrement'){
-      selectedInput.value = (formLogic.subtract(rawData));
-      typeData[transformString(type)] = (formLogic.subtract(rawData));
+    // DATE DECREMENT ----------------------------------------------
+    if(this.dataset.buttonType == 'decrement' && data['return']){
+      selectedInput.value = (formLogic.subtract(rawInputData));
+      var daysDescription = selectedInput.parentElement.nextElementSibling;
+      var days = inputData['daysCount'] = (formLogic.subtract(rawInputData));
+      console.log(days);
 
-      if(data['passengerTotal']){
-        vals[transformString(type)] = parseInt(typeData[transformString(type)]);
-        
-
-        var passengerTotal = formLogic.sumObjProps(vals);
-        
-
-        data.passengerTotal = passengerTotal;
-        updatePassengers(passengerTotal);
-
+      if(selectedInput.value == 1){
+        daysDescription.innerHTML = 'day';
+      } else {
+        daysDescription.innerHTML = 'days';
       }
-      if(data['return']){
-        
-      }
+
+      var returnDate = formLogic.calcDate($departure.value, (days + 1), 'subtract');
+
+      data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
     }
   });
 
@@ -103,6 +150,11 @@ var ui = (function(){
     } else {
       el.innerHTML = newContent + " passengers";
     }
+  }
+
+  function updateReturnDate(month, day, year) {
+    var el = $('#stay p')[0];
+    el.innerHTML = month + '/' + day + '/' + year;
   }
 
   function transformString(string){
