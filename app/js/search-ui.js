@@ -1,4 +1,7 @@
 var ui = (function(){
+  $('#submit').on('click',function(e){
+    e.preventDefault();
+  });
   var $departure = document.getElementById('departure');
   var $span = '<span class="arrow"></span>'
   var $origin = document.getElementsByName('origin')[0];
@@ -85,7 +88,7 @@ var ui = (function(){
     'youth': 0,
     'children': 0,
     'seatInfants': 0,
-    'lapInfants': 0 
+    'lapInfants': 0
   };
 
 
@@ -101,23 +104,23 @@ var ui = (function(){
     var rawInputData = parseInt(inputValue);
     var gggrandparent = this.parentElement.parentElement.parentElement.parentElement;
     var data = gggrandparent.dataset;
-    
-    
+
+
     // PASSENGER INCREMENT -----------------------------------------
     if(this.dataset.buttonType == 'increment' && data['passengerTotal']){
       selectedInput.value = (formLogic.add(rawInputData));
       inputData[transformString(type)] = (formLogic.add(rawInputData));
-      
+
       vals[transformString(type)] = parseInt(inputData[transformString(type)]);
-      
+
 
       var passengerTotal = formLogic.sumObjProps(vals);
-      
+
 
       data.passengerTotal = passengerTotal;
       updatePassengers(passengerTotal);
 
-        
+
     }
 
     // DATE INCREMENT --------------------------------------------------
@@ -138,7 +141,7 @@ var ui = (function(){
       inputData['date'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
       inputData['return'] = 'true';
       updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
-  
+
     }
 
 
@@ -148,10 +151,10 @@ var ui = (function(){
       inputData[transformString(type)] = (formLogic.subtract(rawInputData));
 
       vals[transformString(type)] = parseInt(inputData[transformString(type)]);
-      
+
 
       var passengerTotal = formLogic.sumObjProps(vals);
-      
+
 
       data.passengerTotal = passengerTotal;
       updatePassengers(passengerTotal);
@@ -212,7 +215,7 @@ var ui = (function(){
   function updatePassengers(newContent){
     var el = $('#passengers p')[0];
     if(newContent == 1){
-      el.innerHTML = newContent + " passenger";  
+      el.innerHTML = newContent + " passenger";
     } else {
       el.innerHTML = newContent + " passengers";
     }
