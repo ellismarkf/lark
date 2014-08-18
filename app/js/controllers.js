@@ -5,8 +5,11 @@ var vultureControllers = angular.module('vultureControllers', ['ngResource']);
 vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource', '$http', '$location', 'Destination', 'CityCode', 'test', 'Flights',
   function($scope, $rootScope, $resource, $http, $location, Destination, CityCode, test, Flights) {
 
+    $scope.inputs = document.getElementById('search');
+    $scope.inputData = [];
     // retrieve city codes and store in accessible object
 
+    console.log($scope.inputs);
     var c = {};
 
     function checkEscaped(value, object){
@@ -27,7 +30,7 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
       }
       for(var city in cities){
         if(checkEscaped(city, escaped)){
-            return;         
+            return;
         }
         c[city] = cities[city];
       }
@@ -52,7 +55,10 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
       $location.path( path );
     };
 
-    document.getElementById('submit').addEventListener('click', function(){
+    // ng-click="goToPage('/results')"
+
+    document.getElementById('submit').addEventListener('click', function(e){
+      // e.preventDefault();
       Flights.fetch(c)
     });
 

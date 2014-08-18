@@ -140,7 +140,7 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
 
     function fetch(cities){
       requestPackage = [];
-      collectInputData(inputs);
+      // collectInputData(inputs);
 
       // function collectVals(city) {
       //   var data = {};
