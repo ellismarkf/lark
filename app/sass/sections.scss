@@ -47,3 +47,33 @@ nav {
     display: inline;
   }
 }
+.accent {
+  padding: 50px 0px;
+
+  h1, h2, h3 {
+    color: whitesmoke;
+    margin: 0;
+    text-align: center;
+  }
+  h1 {
+    font-size: 5.5em;
+    line-height: 3.5rem;
+    font-weight: 800;
+  }
+  h2 {
+    font-size: 2.1rem;
+    font-weight: 300;
+  }
+}
+.purple {
+  background-color: $vulture-purple;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$vulture-purple), color-stop(100%,darken($vulture-purple, 10%)));
+}
+.orange {
+  background-color: $vulture-orange;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$vulture-orange), color-stop(100%,darken($vulture-orange, 10%)));
+}
+.gold {
+  background-color: $vulture-gold;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$vulture-gold), color-stop(100%,darken($vulture-gold, 10%)));
+}
