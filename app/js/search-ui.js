@@ -1,5 +1,7 @@
 var ui = (function(){
   var $departure = document.getElementById('departure');
+  var $span = '<span class="arrow"></span>'
+  var $origin = document.getElementsByName('origin')[0];
   var $initialReturnDateValue = $('#stay p')[0].innerHTML;
 
   if(!$departure.value || $departure.value == null){
@@ -7,7 +9,8 @@ var ui = (function(){
   }
 
   $departure.onchange = function() {
-    $departure.dataset.departure = $departure.value;
+    // $departure.dataset.departure = $departure.value;
+    $departure.dataset.date = $departure.value;
     if(!$departure.value || $departure.value == null){
       $('#stay p')[0].innerHTML = $initialReturnDateValue;
       $('#stay .droption-menu input')[0].value = 0;
@@ -17,8 +20,44 @@ var ui = (function(){
     }
   }
 
+  $origin.onchange = function() {
+    $origin.dataset.origin = $origin.value;
+  }
 
 
+  // document.addEventListener('click', function(e){
+  //   e.preventDefault();
+  //   var targetElement = e.target;
+  //   console.log('targetElement: ', targetElement);
+  //   var dropMenuArray = $('.droption p');
+  //   console.log('dropMenuArray: ', dropMenuArray);
+
+  //   if(targetElement.dataset.dropDown){
+  //     var parent = targetElement.parentElement;
+  //     var dropMenu = parent.childNodes[3];
+  //     var display = $(dropMenu).css("display");
+  //     if(display == 'none' && parent.id == 'passengers') {
+  //       $(dropMenu).slideDown("ease");
+  //       targetElement.lastChild.classList.add('up');
+  //       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
+  //     } else if(display == 'none' && parent.id == 'stay' && $departure.value) {
+  //       $(dropMenu).slideDown("ease");
+  //       targetElement.lastChild.classList.add('up');
+  //       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
+  //     } else {
+  //       targetElement.lastChild.classList.remove('up');
+  //       $(dropMenu).slideUp("ease");
+  //       removeRule(parent, "box-shadow");
+  //     }
+  //   } else if(targetElement.dataset.buttonType) {
+
+  //   } else {
+  //     console.log("you didn't click a drop down");
+  //     console.log(dropMenuArray[0]);
+  //     console.log(dropMenuArray[1]);
+  //   }
+
+  // });
 
   $('.droption p').click(function(){
     var parent = this.parentElement;
@@ -26,11 +65,14 @@ var ui = (function(){
     var display = $(dropMenu).css("display");
     if(display == 'none' && parent.id == 'passengers') {
       $(dropMenu).slideDown("ease");
+      this.lastChild.classList.add('up');
       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
     } else if(display == 'none' && parent.id == 'stay' && $departure.value) {
       $(dropMenu).slideDown("ease");
+      this.lastChild.classList.add('up');
       addRule(parent, "box-shadow", "inset 0 0 3px #F2672D");
     } else {
+      this.lastChild.classList.remove('up');
       $(dropMenu).slideUp("ease");
       removeRule(parent, "box-shadow");
     }
@@ -45,6 +87,7 @@ var ui = (function(){
     'seatInfants': 0,
     'lapInfants': 0 
   };
+
 
   $('.incrementor button').click(function(e){
     e.preventDefault();
@@ -73,6 +116,7 @@ var ui = (function(){
 
       data.passengerTotal = passengerTotal;
       updatePassengers(passengerTotal);
+
         
     }
 
@@ -91,6 +135,8 @@ var ui = (function(){
       var returnDate = formLogic.calcDate($departure.value, days, 'add');
 
       data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      inputData['date'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      inputData['return'] = 'true';
       updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
   
     }
@@ -110,6 +156,10 @@ var ui = (function(){
       data.passengerTotal = passengerTotal;
       updatePassengers(passengerTotal);
 
+      if(data.passengerTotal == 0) {
+        showAlert(gggrandparent);
+      }
+
     }
 
     // DATE DECREMENT ----------------------------------------------
@@ -128,13 +178,28 @@ var ui = (function(){
       var returnDate = formLogic.calcDate($departure.value, (days + 1), 'subtract');
 
       data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      inputData['date'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
       updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
     }
   });
 
   $('.big-btn').click(function(e){
     e.preventDefault();
+    var el = $('#stay p')[0];
+    $('#stay .droption-menu input')[0].value = 0;
+    el.innerText = this.dataset.flightType;
+    el.insertAdjacentHTML('beforeend', $span);
+    if($(el.childNodes[1]).hasClass('up')) {
+      return;
+    } else {
+      el.childNodes[1].classList.add('up');
+    }
   });
+
+  function showAlert(context) {
+    $(context.previousElementSibling).stop(true, true).fadeIn(function(){return false}).delay(3000).fadeOut(function(){return false});
+    return false;
+  }
 
   function addRule (element, property, rule) {
     $(element).css(property, rule);
@@ -150,11 +215,24 @@ var ui = (function(){
     } else {
       el.innerHTML = newContent + " passengers";
     }
+    el.insertAdjacentHTML('beforeend', $span);
+    if($(el.childNodes[1]).hasClass('up')) {
+      return;
+    } else {
+      el.childNodes[1].classList.add('up');
+    }
   }
 
   function updateReturnDate(month, day, year) {
     var el = $('#stay p')[0];
-    el.innerHTML = month + '/' + day + '/' + year;
+    el.innerText = month + '/' + day + '/' + year;
+    el.insertAdjacentHTML('beforeend', $span);
+    if($(el.childNodes[1]).hasClass('up')) {
+      return;
+    } else {
+      el.childNodes[1].classList.add('up');
+    }
+
   }
 
   function transformString(string){
