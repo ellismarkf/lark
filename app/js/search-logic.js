@@ -16,12 +16,12 @@ var formLogic = (function(){
     var departureDate = Date.parse(selectedDate);
     if(operation == 'add'){
       var theFuture = new Date(+(new Date(departureDate)) + (1000 * 60 * 60 * 24 * (days+1)));
-      console.log('the real future: ', Date.parse(theFuture));
+
     } else if(operation = 'subtract'){
       var backToTheFuture = new Date(+(new Date(departureDate)) + (1000 * 60 * 60 * 24 * (days+1)));
-      console.log('back to the future: ', backToTheFuture, Date.parse(backToTheFuture));
+
       var theFuture = new Date(+(new Date(backToTheFuture)) - (1000 * 60 * 60 * 24));
-      console.log('theFuture: ', theFuture, theFuture.getMonth()+1, theFuture.getDate(), theFuture.getFullYear());
+
     } else {
       return false;
     }
@@ -35,9 +35,9 @@ var formLogic = (function(){
   function sumStringNums(array) {
     var total = 0;
     for(var i = 0; i < array.length; i++){
-      console.log('current sum string value: ', array[i]);
+
       total = total + parseInt(array[i]);
-      console.log('string sum total: ', total);
+
     }
     return total;
   }
