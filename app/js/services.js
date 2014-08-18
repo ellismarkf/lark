@@ -55,9 +55,14 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
 
     function collectInputData(arrayOfInputs){
       for(var i = 0; i < arrayOfInputs.length; i++){
+        if(arrayOfInputs[i].hasChildNodes()){
+          collectInputData(arrayOfInputs[i].children);
+        }
         console.log(arrayOfInputs[i]);
-        var jsonString = JSON.stringify(arrayOfInputs[i]);
-        inputData.push(JSON.parse(jsonString));
+        if(arrayOfInputs[i].tagName == 'INPUT'){
+          var jsonString = JSON.stringify(arrayOfInputs[i].dataset);
+          inputData.push(JSON.parse(jsonString));
+        }
       }
       console.log(inputData);
       return inputData;
