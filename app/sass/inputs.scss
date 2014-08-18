@@ -1,6 +1,6 @@
 .search input {
   display: inline-block;
-  height: 30px;
+  // height: 30px;
   border-radius: 0;
   border: 1px solid $vulture-purple;
   background-color: white;
@@ -9,7 +9,8 @@
   font-weight: 200;
   font-size: 1rem;
   position: relative;
-  top: 1px;
+  padding: 5px 0px;
+
 }
 .search input:focus {
   outline: none;
@@ -22,6 +23,7 @@
   width: 40%;
   min-width: 250px;
   padding-left: 15px;
+  top: 1px;
 }
 
 .search input[type="date"] {
@@ -30,8 +32,9 @@
   font-family: 'Open Sans';
   font-size: 1rem;
   font-weight: 200;
-  position:relative;
-  top: 0px;
+  // position:relative;
+  // top: 0px;
+  height: 30px;
 }
 
 .search select {
@@ -169,7 +172,8 @@
     display: inline-block;
     float: left;
     border: 1px solid #ccc;
-    padding: 0px 5px;
+    padding: 5px 5px;
+    line-height: 0px;
 
     button {
       display:inline-block;
@@ -178,8 +182,9 @@
       border: 1px solid darken($vulture-purple, 15%);
       color: whitesmoke;
       font-weight: 700;
-      position: relative;
-      top: -3px;
+      padding: 0px;
+      width: 20px;
+      height: 19.5px;
     }
     button:focus {
       outline: none;
@@ -191,12 +196,16 @@
 
     input {
       width: 1.25rem;
-      height: 1.09rem;
+      // height: 1.09rem;
       display: inline-block;
-      position: relative;
-      top: 0px;
+      // position: relative;
+      // top: 0px;
       cursor: default;
       text-align: center;
+      vertical-align: middle;
+      padding: 0px;
+      font-size: .8rem;
+
     }
   }
 
