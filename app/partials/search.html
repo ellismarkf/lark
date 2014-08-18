@@ -3,8 +3,12 @@
     <h1>Stop traveling.<br><strong><em>START</em>EXPLORING</strong></h1>
     <form id="search" action="#/results">
       <input type="text" name="origin" placeholder="Where are you flying from?" data-origin="origin">
+      <div class="form-alert">
+        <p>You need at least 1 passenger to start this adventure!</p>
+        <span class="indicator"></span>
+      </div>
       <div id="passengers" class="droption" data-passenger-total="0">
-        <p>passengers</p>
+        <p data-drop-down="true" data-state="unfocused">passengers<span class="arrow"></span></p>
         <div id="p" class="droption-menu p">
           <div class="row clearfix">
             <span class="type">Adults</span>
@@ -62,16 +66,16 @@
           </div>
         </div>
       </div>
-      <input type="date" name="date" id="departure" data-departure="YYYY-MM-DD">
+      <input type="date" name="date" id="departure" data-departure="true" data-date="YYYY-MM-DD">
       <div id="stay" class="droption" data-return="date">
-        <p>Coming back...</p>
+        <p data-drop-down="true" data-state="unfocused">Coming back...<span class="arrow"></span></p>
         <div id="s" class="droption-menu s">
           <div class="row clearfix">
             <span class="length">..in</span>
             <div class="incrementor">
               <button data-button-type="increment">+</button>
               <button data-button-type="decrement">-</button>
-              <input data-days-count="0" value='0'>
+              <input data-days-count="0" data-return="true" data-date="YYYY-MM-DD" value='0'>
             </div>
             <span class="age-range">days</span>
           </div>
