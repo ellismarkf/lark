@@ -263,6 +263,39 @@ nav ul li:hover {
   display: inline;
 }
 
+.accent {
+  padding: 50px 0px;
+}
+.accent h1, .accent h2, .accent h3 {
+  color: whitesmoke;
+  margin: 0;
+  text-align: center;
+}
+.accent h1 {
+  font-size: 5.5em;
+  line-height: 3.5rem;
+  font-weight: 800;
+}
+.accent h2 {
+  font-size: 2.1rem;
+  font-weight: 300;
+}
+
+.purple {
+  background-color: #49506e;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #49506e), color-stop(100%, #353a50));
+}
+
+.orange {
+  background-color: #f2672c;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2672c), color-stop(100%, #dd4c0e));
+}
+
+.gold {
+  background-color: #f89249;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f89249), color-stop(100%, #f77518));
+}
+
 .col {
   margin: 0 auto;
 }
@@ -279,8 +312,12 @@ nav ul li:hover {
   display: inline-block;
 }
 
+.twelfth {
+  width: 8.333333333333%;
+}
+
 .sixth {
-  width: 16.67778%;
+  width: 16.677777777777%;
 }
 
 .quarter {
@@ -288,7 +325,7 @@ nav ul li:hover {
 }
 
 .third {
-  width: 33.33333%;
+  width: 33.33333333333%;
 }
 
 .half {
@@ -296,7 +333,7 @@ nav ul li:hover {
 }
 
 .two-thirds {
-  width: 66.67778%;
+  width: 66.67777777777777%;
 }
 
 .three-q {
@@ -304,7 +341,7 @@ nav ul li:hover {
 }
 
 .five-sixth {
-  width: 83.33333%;
+  width: 83.333333333333%;
 }
 
 .full {
