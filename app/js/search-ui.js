@@ -194,6 +194,7 @@ var ui = (function(){
     } else {
       el.childNodes[1].classList.add('up');
     }
+    this.parentElement.previousElementSibling.childNodes[3].childNodes[5].dataset.return = 'false';
   });
 
   function showAlert(context) {
