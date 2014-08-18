@@ -4,7 +4,8 @@ var vulture = angular.module('vulture', [
     'ngRoute',
     'vultureControllers',
     'vultureServices',
-    'vultureFilters'
+    'vultureFilters',
+    'vultureDirectives'
   ]);
 
 vulture.config(['$routeProvider',
