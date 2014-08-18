@@ -44,9 +44,26 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
   function($http, $rootScope){
 
     var requestPackage = [],
-        responsePackage = [];
+        responsePackage = [],
+        inputs = $(document).ready(function(){
+                      return $('form input');
+        }),
+        inputData = [];
 
     $rootScope.resData = [];
+    console.log(inputs);
+
+    function collectInputData(arrayOfInputs){
+      for(var i = 0; i < arrayOfInputs.length; i++){
+        console.log(arrayOfInputs[i]);
+        var jsonString = JSON.stringify(arrayOfInputs[i]);
+        inputData.push(JSON.parse(jsonString));
+      }
+      console.log(inputData);
+      return inputData;
+    }
+
+
 
     var searchForm = document.getElementById('search');
 
@@ -118,6 +135,7 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
 
     function fetch(cities){
       requestPackage = [];
+      collectInputData(inputs);
 
       // function collectVals(city) {
       //   var data = {};
@@ -157,8 +175,10 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
         requestPackage.push(collectVals(city, cities));
       }
 
-      console.log(requestPackage);
+      // console.log(requestPackage);
       // return requestPackage;
+
+
 
       // requestPackage.splice(5, requestPackage.length - 5);
 
