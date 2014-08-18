@@ -370,7 +370,6 @@ body {
 
 .search input {
   display: inline-block;
-  height: 30px;
   border-radius: 0;
   border: 1px solid #49506e;
   background-color: white;
@@ -379,7 +378,7 @@ body {
   font-weight: 200;
   font-size: 1rem;
   position: relative;
-  top: 1px;
+  padding: 5px 0px;
 }
 
 .search input:focus {
@@ -395,6 +394,7 @@ body {
   width: 40%;
   min-width: 250px;
   padding-left: 15px;
+  top: 1px;
 }
 
 .search input[type="date"] {
@@ -403,8 +403,7 @@ body {
   font-family: 'Open Sans';
   font-size: 1rem;
   font-weight: 200;
-  position: relative;
-  top: 0px;
+  height: 30px;
 }
 
 .search select {
@@ -536,7 +535,8 @@ body {
   display: inline-block;
   float: left;
   border: 1px solid #ccc;
-  padding: 0px 5px;
+  padding: 5px 5px;
+  line-height: 0px;
 }
 .search .droption-menu .incrementor button {
   display: inline-block;
@@ -545,8 +545,9 @@ body {
   border: 1px solid #2b2f40;
   color: whitesmoke;
   font-weight: 700;
-  position: relative;
-  top: -3px;
+  padding: 0px;
+  width: 20px;
+  height: 19.5px;
 }
 .search .droption-menu .incrementor button:focus {
   outline: none;
@@ -557,12 +558,12 @@ body {
 }
 .search .droption-menu .incrementor input {
   width: 1.25rem;
-  height: 1.09rem;
   display: inline-block;
-  position: relative;
-  top: 0px;
   cursor: default;
   text-align: center;
+  vertical-align: middle;
+  padding: 0px;
+  font-size: .8rem;
 }
 .search .droption-menu .big-btn {
   margin-left: 40px;
