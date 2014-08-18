@@ -2,7 +2,7 @@
   <div class="three-q col">
     <h1>Stop traveling.<br><strong><em>START</em>EXPLORING</strong></h1>
     <form id="search" action="#/results">
-      <input type="text" name="origin" placeholder="Where are you flying from?" data-origin="origin">
+      <input type="text" name="origin" placeholder="Where are you flying from?" data-origin="origin" autocomplete="off">
       <div class="form-alert">
         <p>You need at least 1 passenger to start this adventure!</p>
         <span class="indicator"></span>
@@ -84,8 +84,8 @@
           </div>
         </div>
       </div>
+      <button id="submit" class="inline submit" ng-click="goToPage('/results')">SEARCH</button>
     </form>
-    <button id="submit" class="inline submit" ng-click="goToPage('/results')">SEARCH</button>
   </div>
   </section>
   <section class="full col clearfix philosophy">
