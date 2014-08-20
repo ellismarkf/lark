@@ -2,15 +2,17 @@
 
 var vultureControllers = angular.module('vultureControllers', ['ngResource']);
 
-vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource', '$http', '$location', 'Destination', 'CityCode', 'test', 'Flights',
-  function($scope, $rootScope, $resource, $http, $location, Destination, CityCode, test, Flights) {
+vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource', '$http', '$location', '$routeParams', 'Destination', 'CityCode', 'Flights',
+  function($scope, $rootScope, $resource, $http, $location, $routeParams, Destination, CityCode, Flights) {
 
     $scope.inputs = document.getElementById('search');
-    $scope.inputData = [];
-    // retrieve city codes and store in accessible object
+    $scope.inputData = {};
+    $scope.requestPackage = [];
+    $scope.cities = {};
 
-    console.log($scope.inputs);
-    var c = {};
+    console.log('route params: ', $routeParams);
+
+    // retrieve city codes and store in accessible object
 
     function checkEscaped(value, object){
       if(value == object[value]){
@@ -32,40 +34,30 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
         if(checkEscaped(city, escaped)){
             return;
         }
-        c[city] = cities[city];
+        $scope.cities[city] = cities[city];
       }
-      return c;
+      return $scope.cities;
     });
 
     // utilities
-
-    function getKeyByValue(object, value) {
-      for( var prop in object ) {
-          if( object.hasOwnProperty( prop ) ) {
-              if( object[ prop ] === value )
-                return prop;
-          }
-      }
-    }
-
-
-    var tripData = [];
 
     $scope.goToPage = function ( path ) {
       $location.path( path );
     };
 
-    // ng-click="goToPage('/results')"
-
-    document.getElementById('submit').addEventListener('click', function(e){
-      // e.preventDefault();
-      Flights.fetch(c)
-    });
+    // document.getElementById('submit').addEventListener('click', function(e){
+    //   // e.preventDefault();
+    //   $scope.inputData = {};
+    //   Flights.fetch($scope.cities)
+    // });
 
   }]);
 
-vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destination', 'CityCode', 'test', 'Flights',
-  function($scope, $rootScope, Destination, CityCode, test, Flights){
+vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routeParams', 'Destination', 'CityCode', 'Flights',
+  function($scope, $rootScope, $routeParams, Destination, CityCode, Flights){
+
+
+    console.log('route params: ', $routeParams);
 
     var c = {};
 
@@ -76,6 +68,8 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
       return c;
     });
 
+    // COMMENT IN/OUT FOR API RESPONSE INTERPOLATION ----------------------------------
+
     // $scope.trips = [];
 
     // var data = Flights.get();
@@ -85,12 +79,13 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
     // for(var t = 0; t < data.length; t++){
     //   data[t].then(function (tripData) {
     //     var tripData = JSON.parse(tripData);
+    //     console.log(tripData);
     //     var option = {};
 
     //     // console.log(tripData.trips.tripOption[0].pricing[0].fare);
 
     //     var destinationPath = tripData.trips.tripOption[0].pricing[0].fare;
-    //     option.destination = destinationPath[destinationPath.length - 1].destination;
+    //     option.destination = destinationPath[0].destination;
 
     //     var price = tripData.trips.tripOption[0].saleTotal;
     //     var numPrice = parseInt((price.slice(3,price.length)));
@@ -107,6 +102,7 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
     //     option.duration = (duration / 60).toFixed(2);
 
     //     option.cityName = c[option.destination];
+    //     option.origin = c[tripData.trips.tripOption[0].pricing[0].fare[0].origin];
     //     console.log('option: ', option);
 
     //     $scope.$apply(function() {
@@ -120,8 +116,12 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
 
     //   });
     // }
+
+    // END COMMENT IN/OUT FOR API RESPONSE INTERPOLATION -------------------------------
     // $scope.predicate = '';
     // $scope.number = 5000;
+
+    // COMMENT IN/OUT FOR HARD-CODED CITY INTERPOLATION -------------------------------
 
     Destination.query().$promise.then(function (tripData){
 
@@ -154,15 +154,17 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', 'Destinati
         $scope.trips.push(option);
 
       };
-
-      // $scope.trips = result;
     });
+
+    // END COMMENT IN/OUT FOR HARD-CODED CITY INTERPOLATION
+
     var priceSlider = document.getElementById('price');
     var durationSlider = document.getElementById('duration');
 
     $scope.predicate = '';
     $scope.number = getPriceValue();
     $scope.hours = getDurationValue();
+    $scope.origin = $routeParams.origin;
 
 
 
