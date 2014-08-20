@@ -15,7 +15,7 @@ vulture.config(['$routeProvider',
         templateUrl: 'partials/search.html',
         controller: 'searchCtlr'
       }).
-      when('/results', {
+      when('/results/:origin', {
         templateUrl: 'partials/results.html',
         controller: 'resultsCtlr'
       }).
