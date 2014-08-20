@@ -2,7 +2,7 @@
   <div class="three-q col">
     <h1>Stop traveling.<br><strong><em>START</em>EXPLORING</strong></h1>
     <form id="search" action="#/results">
-      <input type="text" name="origin" placeholder="Where are you flying from?" data-origin="origin" autocomplete="off">
+      <input type="text" name="origin" ng-model="origin" placeholder="Where are you flying from?" data-origin="origin" autocomplete="off">
       <div class="form-alert">
         <p>You need at least 1 passenger to start this adventure!</p>
         <span class="indicator"></span>
@@ -66,7 +66,7 @@
           </div>
         </div>
       </div>
-      <input type="date" name="date" id="departure" data-departure="true" data-date="YYYY-MM-DD">
+      <input type="date" name="date" id="departure" data-departure="true" data-outbound="YYYY-MM-DD">
       <div id="stay" class="droption" data-return="date">
         <p data-drop-down="true" data-state="unfocused">Coming back...<span class="arrow"></span></p>
         <div id="s" class="droption-menu s">
@@ -75,7 +75,7 @@
             <div class="incrementor">
               <button data-button-type="increment">+</button>
               <button data-button-type="decrement">-</button>
-              <input data-days-count="0" data-return="true" data-date="YYYY-MM-DD" value='0'>
+              <input data-days-count="0" data-one-way="false" data-return="YYYY-MM-DD" value='0'>
             </div>
             <span class="age-range">days</span>
           </div>
@@ -84,7 +84,7 @@
           </div>
         </div>
       </div>
-      <button id="submit" class="inline submit" ng-click="goToPage('/results')" searchFormSubmitter>SEARCH</button>
+      <button id="submit" class="inline submit" search-form-submitter ng-click="goToPage('/results/' + origin)">SEARCH</button>
     </form>
   </div>
   </section>
