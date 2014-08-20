@@ -56,14 +56,22 @@ var formLogic = (function(){
     for(var prop in obj){
       sum += obj[prop];
     }
-    return sum; 
-  } 
+    return sum;
+  }
 
+  function objLength(obj){
+    var sum = 0;
+    for(var prop in obj){
+      sum += 1;
+    }
+    return sum;
+  }
   return {
     add: increment,
     subtract: subtract,
     calcDate: calcDate,
     sumStringNums: sumStringNums,
-    sumObjProps: sumObjProps
+    sumObjProps: sumObjProps,
+    objLength: objLength
   }
 })();
