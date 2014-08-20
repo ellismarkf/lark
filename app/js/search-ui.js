@@ -13,7 +13,7 @@ var ui = (function(){
 
   $departure.onchange = function() {
     // $departure.dataset.departure = $departure.value;
-    $departure.dataset.date = $departure.value;
+    $departure.dataset.outbound = $departure.value;
     if(!$departure.value || $departure.value == null){
       $('#stay p')[0].innerHTML = $initialReturnDateValue;
       $('#stay .droption-menu input')[0].value = 0;
@@ -138,8 +138,8 @@ var ui = (function(){
       var returnDate = formLogic.calcDate($departure.value, days, 'add');
 
       data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
-      inputData['date'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
-      inputData['return'] = 'true';
+      inputData['return'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      inputData['oneWay'] = 'false';
       updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
 
     }
@@ -181,7 +181,7 @@ var ui = (function(){
       var returnDate = formLogic.calcDate($departure.value, (days + 1), 'subtract');
 
       data.return = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
-      inputData['date'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
+      inputData['return'] = returnDate.year + '-' + returnDate.month + '-' + returnDate.day;
       updateReturnDate(returnDate.month, returnDate.day, returnDate.year);
     }
   });
@@ -197,7 +197,7 @@ var ui = (function(){
     } else {
       el.childNodes[1].classList.add('up');
     }
-    this.parentElement.previousElementSibling.childNodes[3].childNodes[5].dataset.return = 'false';
+    this.parentElement.previousElementSibling.childNodes[3].childNodes[5].dataset.oneWay = 'true';
   });
 
   function showAlert(context) {
