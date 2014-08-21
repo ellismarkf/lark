@@ -56,7 +56,7 @@ vultureServices.factory('Flights', [ '$http', '$rootScope',
 
       responsePackage = [];
 
-      flightRequests.splice(4, flightRequests.length - 4);
+      // flightRequests.splice(4, flightRequests.length - 4);
 
 
       // UNCOMMENT THIS TO MAKE API CALLS --------------vvvvvvvvv
