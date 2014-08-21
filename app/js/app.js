@@ -2,6 +2,7 @@
 
 var vulture = angular.module('vulture', [
     'ngRoute',
+    'ngSanitize',
     'vultureControllers',
     'vultureServices',
     'vultureFilters',

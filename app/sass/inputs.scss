@@ -114,7 +114,7 @@
   padding: 10px;
   border: 1px solid $vulture-purple;
   top: 175px;
-  left: 650px;
+  left: 40%;
   font-weight:200;
   text-align: center;
   color: $vulture-purple;
@@ -124,7 +124,7 @@
   background-image: url('/app/img/indicator.png');
   background-repeat: no-repeat;
   position: absolute;
-  top: 90px;
+  top: 92px;
   left: 30px;
   display: block;
   width: 200px;
@@ -235,7 +235,33 @@
     padding-right: 10px;
   }
 }
+.c-panel {
+  // border-right: 1px solid $vulture-light-p;
+  padding: 30px;
+  input {
+    width: 80%;
+    margin-bottom: 10px;
+    height: 25px;
+    border: 1px solid $vulture-purple;
 
+  }
+  input[type="text"] {
+    font-weight: 200;
+    padding-left: 10px;
+    font-family: 'Open Sans';
+  }
+  input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 0 3px $vulture-gold;
+  }
+  span {
+    position: relative;
+    top: -6px;
+  }
+  color: $vulture-purple;
+  font-weight: 200;
+
+}
 
 
 

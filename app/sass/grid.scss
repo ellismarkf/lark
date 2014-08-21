@@ -1,5 +1,6 @@
 .col {
   margin: 0 auto;
+  box-sizing: border-box;
 }
 .left {
   float:left;
@@ -9,6 +10,18 @@
 }
 .inline {
   display: inline-block;
+}
+.fixed {
+  position: fixed;
+}
+.divide-left {
+  border-right: $vulture-light-p;
+}
+.divide-right {
+  border-left: 1px solid $vulture-light-p;
+}
+.tall {
+  height: 100%;
 }
 .twelfth {
   width: 8.333333333333%;

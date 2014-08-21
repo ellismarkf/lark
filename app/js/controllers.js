@@ -149,6 +149,19 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         var duration = tripData[i].trips.tripOption[0].slice[0].duration;
         option.duration = (duration / 60).toFixed(2);
 
+        var originDeparture = Date.parse(tripData[i].trips.tripOption[0].slice[0].segment[0].leg[0].departureTime);
+        var time = new Date(originDeparture);
+
+        var hour = time.getUTCHours();
+        var mins = time.getUTCMinutes();
+
+        console.log(mins);
+
+        option.originDepartureHour = hour;
+        option.originDepartureMins = mins;
+
+        option.originDeparture = time.toTimeString();
+
         option.cityName = c[option.destination];
 
         $scope.trips.push(option);
@@ -166,7 +179,30 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
     $scope.hours = getDurationValue();
     $scope.origin = $routeParams.origin;
 
+    $scope.formatTime = function(hours, mins){
+        console.log('original: ', hours, mins);
+        var time,
+            am = "AM",
+            pm = "PM";
 
+        if(mins < 10){
+            mins = '0' + mins;
+            console.log('updated mins: ', mins);
+        }
+        if(hours < 12){
+            if(hours == 0) hours = 12;
+            time = hours + ':' + mins + '<span class="morning">' + am + '</span>';
+            console.log('morning:', time);
+        } else {
+            if(hours == 12){
+                time = hours + ':' + mins + '<span class="afternoon">' + pm + '</span>';
+            } else {
+                time = (hours - 12) + ':' + mins + '<span class="afternoon">' + pm + '</span>';
+            }
+            console.log('afternoon: ', time);
+        }
+        return time;
+    }
 
     function getPriceValue (){
       return priceSlider.value;

@@ -1,14 +1,58 @@
-<h1>Cities you can fly to from {{ origin }}:</h1>
-0 <input id="price" type="range" min="0" max="2000" value="2000" ng-model="number">2000   Price  {{ number }}<br>
-0 <input id="duration" type="range" min="0" max="24" value="24" ng-model="hours">24   Duration  {{ hours }}<br>
-<input type="text" ng-model="search">City<br>
+<div class="full col">
 
-<input type="checkbox" ng-model="price" ng-false-value="predicate = '';" ng-true-value="predicate = 'price';" ng-click="predicate='price';">
-<ul>
-  <li ng-repeat="trip in trips | orderBy: predicate | priceMax:number | durationMax:hours | filter:search">
-    <h3>Destination: {{ trip.cityName }}</h3>
-    <p>Price: <small>USD</small><strong>{{ trip.price }}</strong></p>
-    <p>Total Flight Miles: {{ trip.distance }}</p>
-    <p>Total Flight Duration: {{ trip.duration }} hrs</p>
-  </li>
-</ul>
+</div>
+<div class="full col clearfix">
+
+  <div id="cp" class="quarter col left light-accent tall">
+    <div class="c-panel">
+      <p>From {{ origin }}</p>
+      <input type="text" ng-model="search" placeholder="Have a city in mind?"><br>
+      <label>Price  {{ number }}</label><br>
+      <span>0</span>
+      <input id="price" type="range" min="0" max="2000" value="2000" ng-model="number">
+      <span>2000</span><br>
+      <label>Duration  {{ hours }}</label><br>
+      <span>0</span>
+      <input id="duration" type="range" min="0" max="24" value="24" ng-model="hours">
+      <span>24</span><br>
+
+      <input type="checkbox" ng-model="price" ng-false-value="predicate = '';" ng-true-value="predicate = 'price';" ng-click="predicate='price';">
+    </div>
+  </div>
+  <div class="three-q col right divide-right">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d220449.19616552588!2d-97.75340140000003!3d30.3077609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b599a0cc032f%3A0x5d9b464bd469d57a!2sAustin%2C+TX!5e0!3m2!1sen!2sus!4v1408569826868" width="100%" height="300" frameborder="0" style="border:0"></iframe>
+    <div class="five-sixth col left">
+      <ul class="trips-container">
+        <li ng-repeat="trip in trips | orderBy: predicate | priceMax:number | durationMax:hours | filter:search">
+          <div class="trip clearfix">
+            <div class="header left orange clearfix">
+              <h3>{{ trip.cityName.toUpperCase(); }}</h3>
+            </div>
+            <div>
+              <p>$<small>USD</small><strong>{{ trip.price }}</strong></p>
+              <img class="distance-icon" src="/app/img/distance/distance2.svg"><p><strong>{{ trip.distance }}</strong> miles</p>
+              <img class="timer-icon" src="/app/img/timer/timer2.svg"><p><strong>{{ trip.duration }}</strong> hrs</p>
+            </div>
+            <div class="clearfix">
+              <div class="infoMod left">
+                <img class="depart-icon" src="/app/img/depart.svg">
+                <p> Depart {{ origin }}:</p>
+                <p ng-bind-html="formatTime(trip.originDepartureHour, trip.originDepartureMins);"></p>
+              </div>
+              <div class="infoMod left">
+                <img class="arrive-icon" src="/app/img/arrive.svg">
+                <p>Arrive in {{ trip.cityName }}:</p>
+              </div>
+              <div class="infoMod left">
+                <p>{{  }}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<script type="text/javascript" src="js/results-logic.js"></script>
+<script type="text/javascript" src="js/results-ui.js"></script>

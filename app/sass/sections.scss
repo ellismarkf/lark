@@ -37,15 +37,18 @@ nav {
   }
 }
 
-.search {
+.hero {
   background-image: url('/app/img/sunset-plane.jpg');
   background-position: center;
   height: 500px;
 
-  form {
-    box-shadow: 0 0 40px black;
-    display: inline;
-  }
+}
+.banner {
+  padding: 30px;
+}
+.search form {
+  box-shadow: 0 0 40px black;
+  display: inline;
 }
 .accent {
   padding: 50px 0px;
@@ -65,9 +68,68 @@ nav {
     font-weight: 300;
   }
 }
+.trips-container {
+  list-style: none;
+  padding: 0px;
+  margin: 0 0 0 0px;
+}
+.trip {
+  border-top: 1px solid $vulture-orange;
+  // border-bottom: 1px solid $vulture-light-p;
+  margin-bottom: 30px;
+
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    color: $vulture-purple;
+    margin: 3px 15px 0 0;
+    font-weight: 200;
+    padding: 6px;
+    margin-right: 1px dotted $vulture-light-p;
+  }
+
+  img {
+    vertical-align: middle;
+    margin: 0px 5px;
+    width: 25px;
+  }
+
+  svg {
+    vertical-align: middle;
+    width: 25px;
+  }
+  .morning, .afternoon {
+    font-size: .7rem;
+    font-weight: 700;
+  }
+}
+.trip h3 {
+  color: whitesmoke;
+  margin: 0px;
+  display: inline-block;
+}
+.header {
+  padding: 10px;
+  font-size: .6rem;
+  width: 15%;
+  margin-right: 15px;
+}
+.infoMod {
+  height: 100px;
+  margin: 0 auto;
+  width: 30%;
+  border: 1px solid $vulture-light-p;
+}
+.header.orange:hover {
+  background-color: darken($vulture-orange, 10%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,darken($vulture-orange, 3%)), color-stop(100%,darken($vulture-orange, 13%)));
+}
 .purple {
   background-color: $vulture-purple;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$vulture-purple), color-stop(100%,darken($vulture-purple, 10%)));
+}
+.light-accent {
+  background-color: $vulture-light-p;
 }
 .orange {
   background-color: $vulture-orange;
