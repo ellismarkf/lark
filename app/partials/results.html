@@ -6,17 +6,19 @@
   <div id="cp" class="quarter col left light-accent tall">
     <div class="c-panel">
       <p>From {{ origin }}</p>
-      <input type="text" ng-model="search" placeholder="Have a city in mind?"><br>
-      <label>Price  {{ number }}</label><br>
-      <span>0</span>
-      <input id="price" type="range" min="0" max="2000" value="2000" ng-model="number">
-      <span>2000</span><br>
-      <label>Duration  {{ hours }}</label><br>
-      <span>0</span>
-      <input id="duration" type="range" min="0" max="24" value="24" ng-model="hours">
-      <span>24</span><br>
-
-      <input type="checkbox" ng-model="price" ng-false-value="predicate = '';" ng-true-value="predicate = 'price';" ng-click="predicate='price';">
+      <div class="filters">
+        <input type="text" ng-model="search" placeholder="Have a city in mind?"><br>
+        <label>Price (USD) <  {{ number }}</label><br>
+        <span>0</span>
+        <input id="price" type="range" min="0" max="2000" value="2000" ng-model="number">
+        <span>2000</span><br>
+        <label>Duration (hours) < {{ hours }}</label><br>
+        <span>0</span>
+        <input id="duration" type="range" min="0" max="24" value="24" ng-model="hours">
+        <span>24</span><br>
+        <label>Sort by lowest price</label>
+        <input type="checkbox" ng-model="price" ng-false-value="predicate = '';" ng-true-value="predicate = 'price';" ng-click="predicate='price';">
+      </div>
     </div>
   </div>
   <div class="three-q col right divide-right">
@@ -42,6 +44,7 @@
               <div class="infoMod left">
                 <img class="arrive-icon" src="../img/arrive.svg">
                 <p>Arrive in {{ trip.cityName }}:</p>
+                <p ng-bind-html="formatTime(trip.destinationArrivalHour, trip.destinationArrivalMins);"></p>
               </div>
               <div class="infoMod left">
                 <p>{{  }}</p>
@@ -54,5 +57,5 @@
   </div>
 
 </div>
-<script type="text/javascript" src="js/results-logic.js"></script>
-<script type="text/javascript" src="js/results-ui.js"></script>
+<script type="text/javascript" src="../js/results-logic.js"></script>
+<script type="text/javascript" src="../js/results-ui.js"></script>
