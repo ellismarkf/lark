@@ -254,7 +254,7 @@ nav ul li:hover {
 }
 
 .hero {
-  background-image: url("/app/img/sunset-plane.jpg");
+  background-image: url("../img/sunset-plane.jpg");
   background-position: center;
   height: 500px;
 }
@@ -530,7 +530,7 @@ body {
   cursor: default;
 }
 .search .droption .arrow {
-  background: url("/app/img/droption-arrow-sprite.png") 0 0;
+  background: url("../img/droption-arrow-sprite.png") 0 0;
   height: 8px;
   width: 8px;
   display: inline-block;
@@ -539,13 +539,13 @@ body {
   right: 10px;
 }
 .search .droption p:hover .arrow {
-  background: url("/app/img/droption-arrow-sprite.png") 8px 0;
+  background: url("../img/droption-arrow-sprite.png") 8px 0;
 }
 .search .droption .arrow.up {
-  background: url("/app/img/droption-arrow-sprite.png") 0 8px;
+  background: url("../img/droption-arrow-sprite.png") 0 8px;
 }
 .search .droption p:hover .arrow.up {
-  background: url("/app/img/droption-arrow-sprite.png") 8px 8px;
+  background: url("../img/droption-arrow-sprite.png") 8px 8px;
 }
 
 .p {
@@ -574,7 +574,7 @@ body {
 }
 
 .indicator {
-  background-image: url("/app/img/indicator.png");
+  background-image: url("../img/indicator.png");
   background-repeat: no-repeat;
   position: absolute;
   top: 92px;

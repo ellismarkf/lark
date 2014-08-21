@@ -80,7 +80,7 @@
     cursor: default;
   }
   .arrow {
-    background: url('/app/img/droption-arrow-sprite.png') 0 0;
+    background: url('../img/droption-arrow-sprite.png') 0 0;
     height: 8px;
     width: 8px;
     display: inline-block;
@@ -89,13 +89,13 @@
     right: 10px;
   }
   p:hover .arrow {
-    background: url('/app/img/droption-arrow-sprite.png') 8px 0;
+    background: url('../img/droption-arrow-sprite.png') 8px 0;
   }
   .arrow.up {
-    background: url('/app/img/droption-arrow-sprite.png') 0 8px;
+    background: url('../img/droption-arrow-sprite.png') 0 8px;
   }
   p:hover .arrow.up {
-    background: url('/app/img/droption-arrow-sprite.png') 8px 8px;
+    background: url('../img/droption-arrow-sprite.png') 8px 8px;
   }
 }
 .p {
@@ -121,7 +121,7 @@
   z-index: 10;
 }
 .indicator {
-  background-image: url('/app/img/indicator.png');
+  background-image: url('../img/indicator.png');
   background-repeat: no-repeat;
   position: absolute;
   top: 92px;
