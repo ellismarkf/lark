@@ -10,3 +10,4 @@ cities/
 .jshintrc
 api-key.json
 .sass-cache/
+.divshot-cache/
