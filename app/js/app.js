@@ -20,6 +20,10 @@ vulture.config(['$routeProvider',
         templateUrl: 'partials/results.html',
         controller: 'resultsCtlr'
       }).
+      when('/test', {
+        templateUrl: 'partials/test.html',
+        controller: 'testCtlr'
+      }).
       otherwise({
         redirectTo: '/search'
       });
