@@ -30,17 +30,17 @@
             </div>
             <div>
               <p>$<small>USD</small><strong>{{ trip.price }}</strong></p>
-              <img class="distance-icon" src="/app/img/distance/distance2.svg"><p><strong>{{ trip.distance }}</strong> miles</p>
-              <img class="timer-icon" src="/app/img/timer/timer2.svg"><p><strong>{{ trip.duration }}</strong> hrs</p>
+              <img class="distance-icon" src="../img/distance/distance2.svg"><p><strong>{{ trip.distance }}</strong> miles</p>
+              <img class="timer-icon" src="../img/timer/timer2.svg"><p><strong>{{ trip.duration }}</strong> hrs</p>
             </div>
             <div class="clearfix">
               <div class="infoMod left">
-                <img class="depart-icon" src="/app/img/depart.svg">
+                <img class="depart-icon" src="../img/depart.svg">
                 <p> Depart {{ origin }}:</p>
                 <p ng-bind-html="formatTime(trip.originDepartureHour, trip.originDepartureMins);"></p>
               </div>
               <div class="infoMod left">
-                <img class="arrive-icon" src="/app/img/arrive.svg">
+                <img class="arrive-icon" src="../img/arrive.svg">
                 <p>Arrive in {{ trip.cityName }}:</p>
               </div>
               <div class="infoMod left">
