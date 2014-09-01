@@ -141,6 +141,8 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         option.destinationArrivalHour = destinationHour;
         option.destinationArrivalMins = destinationMins;
 
+        console.log('is this code running?');
+
         $scope.$apply(function() {
           $scope.trips.push(option);
         });
@@ -246,6 +248,14 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
 
     function getDurationValue (){
       return durationSlider.value;
+    }
+
+    function objLength(obj){
+      var sum = 0;
+      for(var prop in obj){
+        sum += 1;
+      }
+      return sum;
     }
   }]);
 
