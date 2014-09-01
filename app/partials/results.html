@@ -38,12 +38,12 @@
             <div class="clearfix">
               <div class="infoMod left">
                 <img class="depart-icon" src="./img/depart.svg">
-                <p> Depart {{ origin }}:</p>
+                <p><strong>{{ trip.origin }}</strong></p>
                 <p ng-bind-html="formatTime(trip.originDepartureHour, trip.originDepartureMins);"></p>
               </div>
               <div class="infoMod left">
                 <img class="arrive-icon" src="./img/arrive.svg">
-                <p>Arrive in {{ trip.cityName }}:</p>
+                <p><strong>{{ trip.destination }}</strong></p>
                 <p ng-bind-html="formatTime(trip.destinationArrivalHour, trip.destinationArrivalMins);"></p>
               </div>
               <div class="infoMod left">
