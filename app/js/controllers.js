@@ -84,6 +84,9 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
 
         // console.log(tripData.trips.tripOption[0].pricing[0].fare);
 
+        var tripOrigin = tripData.trips.tripOption[0].slice[0].segment[0].leg[0].origin;
+        option.origin = tripOrigin;
+
         var destinationPath = tripData.trips.tripOption[0].pricing[0].fare;
         option.destination = destinationPath[0].destination;
 
@@ -106,10 +109,12 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         console.log('option: ', option);
 
         var originDeparture = Date.parse(tripData.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime);
+        var originFirstLegArrival = Date.parse(tripData.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime);
         var time = new Date(originDeparture);
+        var firstLegArrival = new Date(originFirstLegArrival);
 
-        var hour = time.getUTCHours();
-        var mins = time.getUTCMinutes();
+        var hour = time.getHours();
+        var mins = time.getMinutes();
 
         console.log(mins);
 
@@ -117,6 +122,24 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         option.originDepartureMins = mins;
 
         option.originDeparture = time.toTimeString();
+
+        var legs = tripData.trips.tripOption[0].slice;
+        console.log('legs: ', legs);
+        var legObjLength = objLength(legs[0].segment);
+        console.log('legObjLength: ', legObjLength);
+        var lastLeg = legs[0].segment[legObjLength - 1].leg[0];
+
+        console.log('lastLeg: ', lastLeg);
+        var destinationArrival = Date.parse(lastLeg.arrivalTime);
+        var destinationArrivalTime = new Date(destinationArrival);
+
+        console.log('arrival time: ', destinationArrivalTime);
+
+        var destinationHour = destinationArrivalTime.getHours();
+        var destinationMins = destinationArrivalTime.getMinutes();
+
+        option.destinationArrivalHour = destinationHour;
+        option.destinationArrivalMins = destinationMins;
 
         $scope.$apply(function() {
           $scope.trips.push(option);
