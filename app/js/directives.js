@@ -19,6 +19,7 @@ vultureDirectives.directive('searchFormSubmitter', ['$document', 'Flights',
           if(trip.request.slice[0])
           scope.requestPackage.push(formatData(scope.inputData, city, scope.cities));
         }
+        scope.requestPackage.splice(4, scope.requestPackage.length - 4)
         // console.log(scope.requestPackage);
         Flights.fetch(scope.requestPackage);
         // console.log('directive finished');
