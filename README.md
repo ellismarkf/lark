@@ -1,7 +1,7 @@
 Lark: A destination-agnostic airfare scanner.
 =============================================
 
-Most applications that help find cheap airfare (Expedia, Kayak, Pricelince, etc.), assume a kind of deterministic view of travel: both the origin and the destination are known.  What they specialize in finding is an affordable flight to and from a specified location.  This works well, but doesn't account for the spontaneous vacations, the whimsical trips that we sometimes have the opportunity to take; neither is it flexible enough to help travelers who have a set amount of time and money, and "just want to go somewhere".
+Most applications that help find cheap airfare (Expedia, Kayak, Priceline, etc.), assume a kind of deterministic view of travel: both the origin and the destination are known.  What they specialize in finding is an affordable flight to and from a specified location.  This works well, but doesn't account for the spontaneous vacations, the whimsical trips that we sometimes have the opportunity to take; neither is it flexible enough to help travelers who have a set amount of time and money, and "just want to go somewhere."
 
 Lark takes a different approach to travel planning.
 ---------------------------------------------------
