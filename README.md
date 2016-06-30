@@ -13,11 +13,11 @@ How it was made.
 
 Lark is built using:
 
-	* Angular
-	* Node
-	* Grunt
-	* QPX Express Flight Data API
-	* Vanilla JS
+* Angular
+* Node
+* Grunt
+* QPX Express Flight Data API
+* Vanilla JS
 
 The biggest challenge in making this app, which was built in five days as a senior project at MakerSquare, was working with the API.  QPX Express is Google's flight data API, and while very powerful, tightly controls the number of requests allowed per day, and even per call to their database.  Given that the nature of the Lark app is to aggregate potentially hundreds of API call responses (a call is made up of one origin and one destination), its funcationality was impeded by what turned out to be a sort of miserly API.  
 
