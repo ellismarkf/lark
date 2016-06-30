@@ -28,5 +28,5 @@ Another challenge was building the API requests.  Typically when using the QPX E
 UPDATE
 ------
 
-This app was originally published and hosted on Divshot, which has since been deactivated.  I have new goals for this project, and will revisit it soon.  Ultimately, I'd like for this to app to change direction, and instead help travelers coming from different origins find the cheapest destination for both of them.  
+This app was originally published and hosted on [Divshot](https://divshot.com/), a static-site hosting service, which has since been shut down.  I have new goals for this project, and for now have taken down all links to the live app, because a) Divshot doesn't exist anymore (although I could transfer the project to Firebase), and more importantly b) I'm going to spend some time thinking about what to salvage from this project before revisiting it.  Ultimately, I'd like for this to app to change direction, and instead help two travelers coming from different origins find the cheapest destination between them.  
 
