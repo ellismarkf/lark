@@ -25,5 +25,8 @@ In its current state, Lark does return four or five flight results, but is limit
 
 Another challenge was building the API requests.  Typically when using the QPX Express API, the destination isn't a variable; because Lark hinges on variable destinations, I had to implement a solution that dynamically created API requests based on many different cities.  This happens in an Angular directive.  While I wasn't able to squeeze more results from the API, with a more generous API, assuming the same interface, the solution I developed would be quite robust.
 
-[Try it for yourself!](http://development.vulture.divshot.io/#/search)
+UPDATE
+------
+
+This app was originally published and hosted on Divshot, which has since been deactivated.  I have new goals for this project, and will revisit it soon.  Ultimately, I'd like for this to app to change direction, and instead help travelers coming from different origins find the cheapest destination for both of them.  
 
