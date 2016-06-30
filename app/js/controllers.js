@@ -10,8 +10,6 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
     $scope.requestPackage = [];
     $scope.cities = {};
 
-    console.log('route params: ', $routeParams);
-
     // retrieve city codes and store in accessible object
 
     function checkEscaped(value, object){
@@ -45,19 +43,11 @@ vultureControllers.controller('searchCtlr', ['$scope', '$rootScope', '$resource'
       $location.path( path );
     };
 
-    // document.getElementById('submit').addEventListener('click', function(e){
-    //   // e.preventDefault();
-    //   $scope.inputData = {};
-    //   Flights.fetch($scope.cities)
-    // });
-
   }]);
 
 vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routeParams', 'Destination', 'CityCode', 'Flights',
   function($scope, $rootScope, $routeParams, Destination, CityCode, Flights){
 
-
-    console.log('route params: ', $routeParams);
 
     var c = {};
 
@@ -79,10 +69,8 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
     for(var t = 0; t < data.length; t++){
       data[t].then(function (tripData) {
         var tripData = JSON.parse(tripData);
-        console.log(tripData);
         var option = {};
 
-        // console.log(tripData.trips.tripOption[0].pricing[0].fare);
 
         var tripOrigin = tripData.trips.tripOption[0].slice[0].segment[0].leg[0].origin;
         option.origin = tripOrigin;
@@ -106,7 +94,6 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
 
         option.cityName = c[option.destination];
         option.origin = c[tripData.trips.tripOption[0].pricing[0].fare[0].origin];
-        console.log('option: ', option);
 
         var originDeparture = Date.parse(tripData.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime);
         var originFirstLegArrival = Date.parse(tripData.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime);
@@ -116,7 +103,6 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         var hour = time.getHours();
         var mins = time.getMinutes();
 
-        console.log(mins);
 
         option.originDepartureHour = hour;
         option.originDepartureMins = mins;
@@ -124,16 +110,12 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         option.originDeparture = time.toTimeString();
 
         var legs = tripData.trips.tripOption[0].slice;
-        console.log('legs: ', legs);
         var legObjLength = objLength(legs[0].segment);
-        console.log('legObjLength: ', legObjLength);
         var lastLeg = legs[0].segment[legObjLength - 1].leg[0];
 
-        console.log('lastLeg: ', lastLeg);
         var destinationArrival = Date.parse(lastLeg.arrivalTime);
         var destinationArrivalTime = new Date(destinationArrival);
 
-        console.log('arrival time: ', destinationArrivalTime);
 
         var destinationHour = destinationArrivalTime.getHours();
         var destinationMins = destinationArrivalTime.getMinutes();
@@ -141,16 +123,12 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         option.destinationArrivalHour = destinationHour;
         option.destinationArrivalMins = destinationMins;
 
-        console.log('is this code running?');
 
         $scope.$apply(function() {
           $scope.trips.push(option);
         });
-        console.log('scope array: ', $scope.trips);
-        // console.log('result: ', result);
 
         // $scope.trips = result;
-        // console.log('scope variable: ', $scope.trips);
 
       });
     }
@@ -193,7 +171,6 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
         // var hour = time.getUTCHours();
         // var mins = time.getUTCMinutes();
 
-        // console.log(mins);
 
         // option.originDepartureHour = hour;
         // option.originDepartureMins = mins;
@@ -218,26 +195,25 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
     $scope.origin = $routeParams.origin;
 
     $scope.formatTime = function(hours, mins){
-        console.log('original: ', hours, mins);
         var time,
             am = "AM",
             pm = "PM";
 
         if(mins < 10){
             mins = '0' + mins;
-            console.log('updated mins: ', mins);
+
         }
         if(hours < 12){
             if(hours == 0) hours = 12;
             time = hours + ':' + mins + '<span class="morning">' + am + '</span>';
-            console.log('morning:', time);
+
         } else {
             if(hours == 12){
                 time = hours + ':' + mins + '<span class="afternoon">' + pm + '</span>';
             } else {
                 time = (hours - 12) + ':' + mins + '<span class="afternoon">' + pm + '</span>';
             }
-            console.log('afternoon: ', time);
+
         }
         return time;
     }
@@ -262,8 +238,6 @@ vultureControllers.controller('resultsCtlr', ['$scope', '$rootScope', '$routePar
 vultureControllers.controller('testCtlr', ['$scope', '$rootScope', '$routeParams', 'Destination', 'CityCode', 'Flights',
   function($scope, $rootScope, $routeParams, Destination, CityCode, Flights){
 
-
-    console.log('route params: ', $routeParams);
 
     var c = {};
 
@@ -318,7 +292,6 @@ vultureControllers.controller('testCtlr', ['$scope', '$rootScope', '$routeParams
         var hour = time.getHours();
         var mins = time.getMinutes();
 
-        console.log(mins);
 
         option.originDepartureHour = hour;
         option.originDepartureMins = mins;
@@ -326,16 +299,12 @@ vultureControllers.controller('testCtlr', ['$scope', '$rootScope', '$routeParams
         option.originDeparture = time.toTimeString();
 
         var legs = tripData[i].trips.tripOption[0].slice;
-        console.log('legs: ', legs);
         var legObjLength = objLength(legs[0].segment);
-        console.log('legObjLength: ', legObjLength);
         var lastLeg = legs[0].segment[legObjLength - 1].leg[0];
 
-        console.log('lastLeg: ', lastLeg);
         var destinationArrival = Date.parse(lastLeg.arrivalTime);
         var destinationArrivalTime = new Date(destinationArrival);
 
-        console.log('arrival time: ', destinationArrivalTime);
 
         var destinationHour = destinationArrivalTime.getHours();
         var destinationMins = destinationArrivalTime.getMinutes();
@@ -361,26 +330,25 @@ vultureControllers.controller('testCtlr', ['$scope', '$rootScope', '$routeParams
     $scope.origin = $routeParams.origin;
 
     $scope.formatTime = function(hours, mins){
-        console.log('original: ', hours, mins);
         var time,
             am = "AM",
             pm = "PM";
 
         if(mins < 10){
             mins = '0' + mins;
-            console.log('updated mins: ', mins);
+
         }
         if(hours < 12){
             if(hours == 0) hours = 12;
             time = hours + ':' + mins + '<span class="morning">' + am + '</span>';
-            console.log('morning:', time);
+
         } else {
             if(hours == 12){
                 time = hours + ':' + mins + '<span class="afternoon">' + pm + '</span>';
             } else {
                 time = (hours - 12) + ':' + mins + '<span class="afternoon">' + pm + '</span>';
             }
-            console.log('afternoon: ', time);
+
         }
         return time;
     }
@@ -401,20 +369,3 @@ vultureControllers.controller('testCtlr', ['$scope', '$rootScope', '$routeParams
       return sum;
     }
   }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
